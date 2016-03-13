@@ -1,11 +1,14 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 	
 	int OrderID;
-	//Package packages[];
-	//Courier courierDetails;
-	//Receipient receipientDetails;
+	List<Package> packages = new ArrayList<Package>();
+	Courier courierDetails;
+	Receipient receipientDetails;
 	int priority;
 	double price;
 	boolean paid;
@@ -14,6 +17,22 @@ public class Order {
 	
 	public Order(){
 		
+	}
+	
+	public void addPackage(Package p){
+		packages.add(p);
+	}
+	
+	/*public void removePackage(Package p){
+		packages.remove(p);
+	}*/
+	
+	public void setCourier(Courier c){
+		this.courierDetails = c;
+	}
+	
+	public void setReceipient(Receipient r){
+		this.receipientDetails = r;
 	}
 	
 	public void setPriority(int newPriority){
@@ -30,6 +49,18 @@ public class Order {
 	
 	public void setStatus(int newStatus){
 		this.status = newStatus;
+	}
+	
+	public List<Package> getPackages(){
+		return packages;
+	}
+	
+	public Courier getCourier(){
+		return this.Courier;
+	}
+	
+	public Receipient getReceipient(){
+		return this.receipientDetails;
 	}
 	
 	public int getPriority(){
