@@ -8,6 +8,8 @@ public class Person{
 	protected String address; 
 	protected String telephone;
 	
+	//Git Test----------------
+	
 	/*public void logIn(email, password){
 		//Enter email and password into dialog box
 	}
