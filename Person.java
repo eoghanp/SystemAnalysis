@@ -5,13 +5,12 @@ public class Person{
 	protected String LastName;
 	protected String email;
 	private String password;
-	protected String address;
+	protected String address; 
 	protected String telephone;
 	
 	/*public void logIn(email, password){
 		//Enter email and password into dialog box
 	}
-	
 	public void logOut(){
 		//Click log out button
 	}*/
