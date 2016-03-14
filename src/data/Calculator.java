@@ -7,7 +7,7 @@ public class Calculator {
 		
 	}
 	
-	public double calculateCosts(){
+	public double getDeliveryCost(){
 		return 11.2;
 	}
 }

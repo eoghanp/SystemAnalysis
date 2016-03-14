@@ -15,8 +15,20 @@ public class Order {
 	int status;
 	//enum status {withCustomer, withCourier, delivered};
 	
-	public Order(){
-		
+	public Order(List<Package> packaages, Receipient receipient, double price){
+		this.packages = packages;
+		this.receipientDetails = receipient;
+		this.priority = 3;
+		this.status = 0;
+		this.price = price;
+	}
+	
+	public Order(List<Package> packaages, Receipient receipient, double price, int priority){
+		this.packages = packages;
+		this.receipientDetails = receipient;
+		this.priority = priority;
+		this.status = 0;
+		this.price = price;
 	}
 	
 	public void addPackage(Package p){
