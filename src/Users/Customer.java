@@ -1,10 +1,19 @@
-public class Customer
+package Users;
+
+import java.util.List;
+
+import Works.Order;
+import data.Calculator;
+import data.Parcel;
+
+public class Customer extends Person
 {
 	private int customerID;
 	private int creditCardNumber;
 
-	public Customer(int customerID, int creditCardNumber)
+	public Customer(String first, String last, String mail, String pass, String add, String phone, int customerID, int creditCardNumber)
 	{
+		super(first, last, mail, pass, add, phone);
 		this.customerID = customerID;
 		this.creditCardNumber = creditCardNumber;
 	}
@@ -36,15 +45,18 @@ public class Customer
 
 	public void enquireAboutService()
 	{
-
+		
 	}
 
-	public void purchaseSerice()
+	public void purchaseService(List<Parcel> parcels)
 	{
-
+		Calculator c = new Calculator();
+		double cost = c.getDeliveryCost(parcels);
+		Order order = new Order(parcels, cost);
+		System.out.print("Purchasing Service: " + order.getID() + "\n" + order.getPrice());
 	}
 
-	public void specifyDetails()
+	public String specifyDetails()
 	{
 		String customerDetails = customerID + "\n" +
 								 creditCardNumber;

@@ -1,3 +1,4 @@
+package Business;
 public class Business
 {
 	private String name;
@@ -18,7 +19,7 @@ public class Business
 		this.creditCardNumber = creditCardNumber;
 	}
 
-	public void getBusinessDetails()
+	public String getBusinessDetails()
 	{
 		String businessDetails = name + "\n" +
 								 address + "\n" +
