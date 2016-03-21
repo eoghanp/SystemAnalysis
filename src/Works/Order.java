@@ -1,51 +1,53 @@
-package data;
+package Works;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Parcel;
+
 public class Order {
 	
 	int OrderID;
-	List<Package> packages = new ArrayList<Package>();
-	Courier courierDetails;
-	Receipient receipientDetails;
+	List<Parcel> parcels = new ArrayList<Parcel>();
+	//Courier courierDetails;
+	//Receipient receipientDetails;
 	int priority;
 	double price;
 	boolean paid;
 	int status;
 	//enum status {withCustomer, withCourier, delivered};
 	
-	public Order(List<Package> packaages, Receipient receipient, double price){
-		this.packages = packages;
-		this.receipientDetails = receipient;
+	public Order(List<Parcel> parcels, /*Receipient receipient,*/ double price){
+		this.parcels = parcels;
+		//this.receipientDetails = receipient;
 		this.priority = 3;
 		this.status = 0;
 		this.price = price;
 	}
 	
-	public Order(List<Package> packaages, Receipient receipient, double price, int priority){
-		this.packages = packages;
-		this.receipientDetails = receipient;
+	public Order(List<Parcel> parcels, /*Receipient receipient,*/ double price, int priority){
+		this.parcels = parcels;
+		//this.receipientDetails = receipient;
 		this.priority = priority;
 		this.status = 0;
 		this.price = price;
 	}
 	
-	public void addPackage(Package p){
-		packages.add(p);
+	public void addParcel(Parcel p){
+		parcels.add(p);
 	}
 	
-	/*public void removePackage(Package p){
-		packages.remove(p);
+	public void removeParcel(Parcel p){
+		parcels.remove(p);
+	}
+	
+	/*public void setCourier(Courier c){
+		this.courierDetails = c;
 	}*/
 	
-	public void setCourier(Courier c){
-		this.courierDetails = c;
-	}
-	
-	public void setReceipient(Receipient r){
+	/*public void setReceipient(Receipient r){
 		this.receipientDetails = r;
-	}
+	}*/
 	
 	public void setPriority(int newPriority){
 		this.priority = newPriority;
@@ -63,16 +65,20 @@ public class Order {
 		this.status = newStatus;
 	}
 	
-	public List<Package> getPackages(){
-		return packages;
+	public List<Parcel> getParcels(){
+		return parcels;
 	}
 	
-	public Courier getCourier(){
+	/*public Courier getCourier(){
 		return this.Courier;
-	}
+	}*/
 	
-	public Receipient getReceipient(){
+	/*public Receipient getReceipient(){
 		return this.receipientDetails;
+	}*/
+	
+	public int getID(){
+		return this.OrderID;
 	}
 	
 	public int getPriority(){
