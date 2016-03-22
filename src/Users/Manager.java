@@ -1,7 +1,9 @@
 package Users;
 
+import Works.Order;
+
 public class Manager {
-	//public Order [] listOfOrders;
+	public Order [] listOfOrders;
 	protected Courier [] listOfCouriers;
 	
 	public void reviewOrder(){
@@ -12,12 +14,12 @@ public class Manager {
 		
 	}
 	
-	/*public Courier[] getListOfCouriers(){
+	public Courier[] getListOfCouriers(){
 		return listOfCouriers;
 	}
 	
 	public Order[] getListOfOrders(){
 		return listOfOrders;
-	}*/
+	}
 
 }
