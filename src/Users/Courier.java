@@ -30,9 +30,9 @@ public class Courier {
 		
 	}
 	
-	public void removeJob(Order jobName){
+	/*public void removeJob(Order jobName){
 		
-	}
+	}*/
 	
 	public void organizeSchedule(){
 		

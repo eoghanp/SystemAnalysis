@@ -20,21 +20,19 @@ public class mainActivity {
 		List<Parcel> l = new ArrayList<Parcel>();
 		l.add(p1);
 		customer.purchaseService(l);*/
+		Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
 		
 		JFrame frame = new JFrame("Purchase Service");
-	    frame.setSize(450, 300);
+	    frame.setSize(900, 550);
 	    frame.addWindowListener(new WindowAdapter() {
 	      public void windowClosing(WindowEvent e) {
 	        System.exit(0);
 	      }
 	    });
 
-	    frame.getContentPane().add(new CustomerUI());
+	    frame.getContentPane().add(new CustomerUI(customer));
 	    frame.setVisible(true);
 
 	}
-	
-	
-
 	
 }
