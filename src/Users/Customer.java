@@ -3,7 +3,6 @@ package Users;
 import java.util.List;
 
 import Works.Order;
-import data.Calculator;
 import data.Parcel;
 
 public class Customer extends Person

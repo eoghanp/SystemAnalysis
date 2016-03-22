@@ -13,16 +13,10 @@ import data.Parcel;
 
 public class mainActivity {
 
+	protected static JFrame frame;
+	
 	public static void main(String[] args) {
-		/*Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
-		int dims[] = {10, 5, 5};
-		Parcel p1 = new Parcel(01, dims, 20, "none", 1);
-		List<Parcel> l = new ArrayList<Parcel>();
-		l.add(p1);
-		customer.purchaseService(l);*/
-		Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
-		
-		JFrame frame = new JFrame("Purchase Service");
+		frame = new JFrame("Purchase Service");
 	    frame.setSize(900, 550);
 	    frame.addWindowListener(new WindowAdapter() {
 	      public void windowClosing(WindowEvent e) {
@@ -30,9 +24,22 @@ public class mainActivity {
 	      }
 	    });
 
-	    frame.getContentPane().add(new CustomerUI(customer));
-	    frame.setVisible(true);
+	    testPurchaseService();
+	    testAssignCourier();
 
+	}
+
+	private static void testAssignCourier() {
+		// frame.getContentPane().add(new ManagerUI());
+		// frame.setVisible(true);
+		
+	}
+
+	private static void testPurchaseService() {
+		Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
+		frame.getContentPane().add(new CustomerUI(customer));
+		frame.setVisible(true);
+		
 	}
 	
 }
