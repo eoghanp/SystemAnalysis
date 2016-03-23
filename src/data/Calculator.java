@@ -8,10 +8,15 @@ public class Calculator {
 		
 	}
 	
-	public double getDeliveryCost(List<Parcel> parcels){
+	public double getDeliveryCost(List<Parcel> parcels, int priority){
 		Parcel p;
 		double cost = 0.0, size;
 		int sizeArr[];
+		
+		if (priority == 0)
+			cost = 10;
+		else
+			cost = 25;
 		
 		for (int i = 0; i < parcels.size(); i++){
 			p = parcels.get(i);
@@ -32,7 +37,9 @@ public class Calculator {
 				break;
 			case "fridge": cost += 15;
 				break;
-			case "livestock": cost += 25;
+			case "freezer": case "tanker": cost += 25;
+				break;
+			case "livestock": cost += 35;
 				break;
 			}
 			

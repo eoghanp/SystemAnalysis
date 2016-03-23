@@ -2,6 +2,7 @@ package data;
 
 public class Parcel {
 
+private String description;
 private int parcelID;
 private int[] dimensions;  //Length, Width, Height
 private double weight;
@@ -9,7 +10,8 @@ private String specialRequirements;
 private int urgency;
  
 //constructor to create a parcel
-public Parcel(int parcelID, int[] dimensions, double weight, String specialRequirements, int urgency) {
+public Parcel(String desc, int parcelID, int[] dimensions, double weight, String specialRequirements, int urgency) {
+this.description = desc;
 this.parcelID = parcelID;
 this.dimensions = dimensions;
 this.weight = weight;
@@ -17,7 +19,14 @@ this.specialRequirements = specialRequirements;
 this.urgency = urgency;
 }
 
- 
+public void setDescription(String desc){
+	this.description = desc;
+}
+
+public String getDescription(){
+	return this.description;
+}
+
 public int[] getDimensions() {
 	return dimensions;
 }

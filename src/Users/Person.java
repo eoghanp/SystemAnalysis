@@ -5,7 +5,7 @@ public class Person{
 	protected String FirstName;
 	protected String LastName;
 	protected String email;
-	private String password;
+	protected String password;
 	protected String address; 
 	protected String telephone;
 	
@@ -43,6 +43,14 @@ public class Person{
 	
 	public String getTelephone(){
 		return telephone;
+	}
+	
+	public void setFirstName(String fname){
+		FirstName = fname;
+	}
+	
+	public void setLastName(String lname){
+		LastName = lname;
 	}
 	
 	public void setEmail(String newEmail){
