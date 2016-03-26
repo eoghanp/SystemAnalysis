@@ -12,10 +12,10 @@ public interface Job
 	*/
 
 
-	public abstract int sendBackJob();
+	//public abstract int sendBackJob();
 
-	public abstract int sendForwardJob();
+	//public abstract int sendForwardJob();
 
-	public abstract String getJobStatus();
+	//public abstract String getJobStatus();
 
 }

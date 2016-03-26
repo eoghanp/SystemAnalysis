@@ -3,9 +3,10 @@ package Works;
 import java.util.ArrayList;
 import java.util.List;
 
+import UI.Job;
 import data.Parcel;
 
-public class Order {
+public class Order implements Job{
 	
 	int OrderID;
 	List<Parcel> parcels = new ArrayList<Parcel>();

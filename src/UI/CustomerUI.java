@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Users.Customer;
+import Users.Manager;
 import data.Calculator;
 import data.Parcel;
 
@@ -44,10 +45,11 @@ public class CustomerUI extends JPanel implements ActionListener {
   protected List<Parcel> l = new ArrayList<Parcel>();
   
   protected Customer cust;
+  protected Manager man;
   protected Calculator c = new Calculator();
   
-  public CustomerUI(Customer customer) {
-	  
+  public CustomerUI(Customer customer, Manager manager) {
+	  man = manager;
 	  cust = customer;
 	  
 	  setLayout(null);
@@ -200,7 +202,7 @@ public void actionPerformed(ActionEvent evt) {
 		  if (l.size() != 0 && (!(collectiontxt.getText().equals(""))) && (!(receipientNametxt.getText().equals(""))) && (!(receipientAddrtxt.getText().equals(""))) && (!(receipientPhonetxt.getText().equals("")))){
 			  //create recipient here
 			  double cost = c.getDeliveryCost(l, deliveryOptions.getSelectedIndex());
-			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex());
+			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex(), man);
 			  System.out.println(collectiontxt.getText());
 		  }
 		  else

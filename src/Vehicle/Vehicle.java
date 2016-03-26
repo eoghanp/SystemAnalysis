@@ -9,7 +9,7 @@ public class Vehicle {
 	private double[] storageDimensions;
 	private String specialFeatures;
 	private String classification;
-	private Route route; //the route assigned to the vehicle
+	//private Route route; //the route assigned to the vehicle
 
 	
 	//constructor
@@ -63,12 +63,12 @@ public class Vehicle {
 		this.classification = classification;
 	}
 	
-	public void setRoute(Route route) {
+	/*public void setRoute(Route route) {
 		this.route = route;
 	}
 	
 	public Route getRoute() {
 		return route;
-	}
+	}*/
 
 }

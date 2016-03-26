@@ -1,12 +1,13 @@
 package Users;
 
-public class Courier {
+public class Courier extends Person{
 	private int courierID;
 	//public Vehicle courierVehicle;
 	//public Order [] OrderList;
 	
 	public Courier() {
-		// TODO Auto-generated constructor stub
+		super(null, null, null, null, null, null);
+		this.courierID = 0;
 	}
 
 
@@ -25,6 +26,10 @@ public class Courier {
 	public Vehicle getVehicle(){
 		return courierVehicle;
 	}*/
+	
+	public String getName(){
+		return super.getName();
+	}
 	
 	public void assignJob(){
 		

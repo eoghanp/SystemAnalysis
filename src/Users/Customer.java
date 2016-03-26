@@ -47,9 +47,10 @@ public class Customer extends Person
 		
 	}
 
-	public void purchaseService(List<Parcel> parcels, double cost, int priority)
+	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man)
 	{
 		Order order = new Order(parcels, cost, priority);
+		man.addOrder(order);
 		System.out.print("Purchasing Service: " + order.getPriority() + "\n" + order.getPrice());
 	}
 

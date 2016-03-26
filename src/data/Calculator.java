@@ -1,6 +1,11 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import UI.Job;
+import Works.Order;
+import route.Route;
 
 public class Calculator {
 	
@@ -54,5 +59,21 @@ public class Calculator {
 		}
 		//add stuff for distance
 		return cost;
+	}
+	
+	public List<Route> calculateRoutes(List<Order> listOfOrders){
+		List<Route> routes = new ArrayList<Route>();
+		int a = 0;
+		System.out.println(listOfOrders.size());
+		System.out.println(listOfOrders.size()/5);
+		System.out.println(2 / 5);
+		for (int i = 0; i < ((listOfOrders.size()/5)+1); i++){
+			routes.add(new Route(i, null));
+			for (int j = 0; j < 5 && a < listOfOrders.size(); j++){
+				routes.get(i).addJob(listOfOrders.get(a));
+				a++;
+			}
+		}
+		return routes;
 	}
 }
