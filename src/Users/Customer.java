@@ -5,7 +5,7 @@ import java.util.List;
 import Works.Order;
 import data.Parcel;
 
-public class Customer extends Person
+public class Customer extends Person implements Purchaser
 {
 	private int customerID;
 	private int creditCardNumber;
@@ -19,7 +19,7 @@ public class Customer extends Person
 
 	public void provideFeeback()
 	{
-
+		
 	}
 
 	public int getCustomerID()
@@ -32,6 +32,7 @@ public class Customer extends Person
 		this.customerID = customerID;
 	}
 
+	@Override
 	public int getCardNumber()
 	{
 		return creditCardNumber;
@@ -42,22 +43,26 @@ public class Customer extends Person
 		this.creditCardNumber = creditCardNumber;
 	}
 
+	@Override
 	public void enquireAboutService()
 	{
 		
 	}
 
-	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man)
+	@Override
+	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person)
 	{
-		Order order = new Order(parcels, cost, priority);
+		Order order = new Order(parcels, person, cost, priority);
 		man.addOrder(order);
 		System.out.print("Purchasing Service: " + order.getPriority() + "\n" + order.getPrice());
 	}
 
+	@Override
 	public String specifyDetails()
 	{
 		String customerDetails = customerID + "\n" +
 								 creditCardNumber;
 		return customerDetails;
 	}
+
 }

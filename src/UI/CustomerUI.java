@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 
 import Users.Customer;
 import Users.Manager;
+import Users.Person;
+import Users.Purchaser;
 import data.Calculator;
 import data.Parcel;
 
@@ -44,7 +46,7 @@ public class CustomerUI extends JPanel implements ActionListener {
   protected String options[] = {"standard", "fast"};
   protected List<Parcel> l = new ArrayList<Parcel>();
   
-  protected Customer cust;
+  protected Purchaser cust;
   protected Manager man;
   protected Calculator c = new Calculator();
   
@@ -191,7 +193,6 @@ public class CustomerUI extends JPanel implements ActionListener {
 		parcels = new JTextArea("no parcels added");
 		JScrollPane pane = new JScrollPane(parcels);
 		pane.setBounds(525, 355, 300, 145);
-		//parcels.setBounds(525, 355, 300, 145);
 		parcels.setEditable(false);
 		add(pane);
 	  
@@ -200,10 +201,14 @@ public class CustomerUI extends JPanel implements ActionListener {
 public void actionPerformed(ActionEvent evt) {
 	  if ("purchase".equals(evt.getActionCommand())) {
 		  if (l.size() != 0 && (!(collectiontxt.getText().equals(""))) && (!(receipientNametxt.getText().equals(""))) && (!(receipientAddrtxt.getText().equals(""))) && (!(receipientPhonetxt.getText().equals("")))){
-			  //create recipient here
 			  double cost = c.getDeliveryCost(l, deliveryOptions.getSelectedIndex());
-			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex(), man);
+			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex(), man, new Person(receipientNametxt.getText(), receipientNametxt.getText(), null, null, receipientAddrtxt.getText(), receipientPhonetxt.getText()));
 			  System.out.println(collectiontxt.getText());
+			  
+			  collectiontxt.setText(null);
+			  receipientNametxt.setText(null);
+			  receipientAddrtxt.setText(null);
+			  receipientPhonetxt.setText(null);
 		  }
 		  else
 			  JOptionPane.showMessageDialog(null, "All fields must be filled in and at least one parcel must be added to the order before it can be purchased");
