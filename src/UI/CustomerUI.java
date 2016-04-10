@@ -225,7 +225,8 @@ public void actionPerformed(ActionEvent evt) {
 	    	}
 	    	else
 	    		JOptionPane.showMessageDialog(null, "Parcel details must be provided");
-	    }else {
+	    }else 
+	    {
 	        System.exit(0);
 	    }
   }
