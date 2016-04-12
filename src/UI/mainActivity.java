@@ -30,7 +30,7 @@ public class mainActivity {
 	    testPurchaseService();
 	    //Thread.sleep(30000);
 	    testAddCourier();
-	   // Thread.sleep(30000);
+	    Thread.sleep(180000);
 	    testAssignCourier();
 
 	}
