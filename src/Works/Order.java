@@ -3,6 +3,7 @@ package Works;
 import java.util.ArrayList;
 import java.util.List;
 
+import Report.Report;
 import Users.Recipient;
 import data.Parcel;
 
@@ -16,6 +17,7 @@ public class Order implements Job{
 	double price;
 	boolean paid;
 	int status;
+	Report report;
 	//enum status {withCustomer, withCourier, delivered};
 	
 	public Order(List<Parcel> parcels, Recipient recipient, double price){
@@ -24,6 +26,7 @@ public class Order implements Job{
 		this.priority = 3;
 		this.status = 0;
 		this.price = price;
+		this.report = new Report();
 	}
 	
 	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority){
@@ -32,6 +35,7 @@ public class Order implements Job{
 		this.priority = priority;
 		this.status = 0;
 		this.price = price;
+		this.report = new Report();
 	}
 	
 	public void addParcel(Parcel p){

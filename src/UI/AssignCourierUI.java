@@ -74,6 +74,7 @@ public class AssignCourierUI extends JPanel implements ActionListener {
 				assignedTxt += routes.get(b).getRouteId() + ": " + routes.get(b).getRouteDetails() + " assigned to " + courierList.get(a).getName() + "\n";
 				availableCouriers.removeItemAt(a);
 				((DefaultTableModel)table.getModel()).removeRow(b);
+				courierList.remove(a);
 				assigned.setText(assignedTxt);
 			}
 		}
