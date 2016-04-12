@@ -3,31 +3,32 @@ package Works;
 import java.util.ArrayList;
 import java.util.List;
 
+import Users.Recipient;
 import data.Parcel;
 
-public class Order {
+public class Order implements Job{
 	
 	int OrderID;
 	List<Parcel> parcels = new ArrayList<Parcel>();
 	//Courier courierDetails;
-	//Receipient receipientDetails;
+	Recipient recipientDetails;
 	int priority;
 	double price;
 	boolean paid;
 	int status;
 	//enum status {withCustomer, withCourier, delivered};
 	
-	public Order(List<Parcel> parcels, /*Receipient receipient,*/ double price){
+	public Order(List<Parcel> parcels, Recipient recipient, double price){
 		this.parcels = parcels;
-		//this.receipientDetails = receipient;
+		this.recipientDetails = recipient;
 		this.priority = 3;
 		this.status = 0;
 		this.price = price;
 	}
 	
-	public Order(List<Parcel> parcels, /*Receipient receipient,*/ double price, int priority){
+	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority){
 		this.parcels = parcels;
-		//this.receipientDetails = receipient;
+		this.recipientDetails = recipient;
 		this.priority = priority;
 		this.status = 0;
 		this.price = price;
@@ -45,9 +46,9 @@ public class Order {
 		this.courierDetails = c;
 	}*/
 	
-	/*public void setReceipient(Receipient r){
-		this.receipientDetails = r;
-	}*/
+	public void setRecipient(Recipient r){
+		this.recipientDetails = r;
+	}
 	
 	public void setPriority(int newPriority){
 		this.priority = newPriority;
@@ -73,9 +74,9 @@ public class Order {
 		return this.Courier;
 	}*/
 	
-	/*public Receipient getReceipient(){
-		return this.receipientDetails;
-	}*/
+	public Recipient getRecipient(){
+		return this.recipientDetails;
+	}
 	
 	public int getID(){
 		return this.OrderID;

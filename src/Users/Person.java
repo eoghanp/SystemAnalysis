@@ -1,11 +1,11 @@
 package Users;
 import javax.swing.*;
 
-public class Person{
+public class Person implements Recipient{
 	protected String FirstName;
 	protected String LastName;
 	protected String email;
-	private String password;
+	protected String password;
 	protected String address; 
 	protected String telephone;
 	
@@ -45,6 +45,14 @@ public class Person{
 		return telephone;
 	}
 	
+	public void setFirstName(String fname){
+		FirstName = fname;
+	}
+	
+	public void setLastName(String lname){
+		LastName = lname;
+	}
+	
 	public void setEmail(String newEmail){
 		email = newEmail;
 	}
@@ -69,6 +77,12 @@ public class Person{
 			   address + "\n" +
 			   telephone;
 		return details;
+	}
+
+	@Override
+	public String trackDelivery() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
