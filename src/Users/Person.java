@@ -1,7 +1,7 @@
 package Users;
 import javax.swing.*;
 
-public class Person{
+public class Person implements Recipient{
 	protected String FirstName;
 	protected String LastName;
 	protected String email;
@@ -77,6 +77,12 @@ public class Person{
 			   address + "\n" +
 			   telephone;
 		return details;
+	}
+
+	@Override
+	public String trackDelivery() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

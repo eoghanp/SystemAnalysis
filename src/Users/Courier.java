@@ -1,9 +1,12 @@
 package Users;
 
+import route.Route;
+
 public class Courier extends Person {
 	private int courierID;
 	//public Vehicle courierVehicle;
 	//public Order [] OrderList;
+	private Route route;
 	
 	public Courier(String first, String last, String mail, String pass, String add, String phone, int courierID)
 	{
@@ -44,16 +47,24 @@ public class Courier extends Person {
 	}
 	
 
-	//public void removeJob(Order jobName){
-		
-//	}
-
+	public String getName(){
+		return super.getName();
+	}
+	
 	/*public void removeJob(Order jobName){
 		
 	}*/
 
 	public void organizeSchedule(){
 		
+	}
+	
+	public void setRoute(Route r){
+		this.route = r;
+	}
+	
+	public Route getRoute(){
+		return this.route;
 	}
 
 }

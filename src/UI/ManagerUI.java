@@ -108,6 +108,7 @@ public class ManagerUI extends JPanel implements ActionListener
 			  }
 			  else{
 				  Courier employee = new Courier(courierFirstNametxt.getText(),courierLastNametxt.getText(),emailtxt.getText(),passwordtxt.getText(),addresstxt.getText(),contacttxt.getText(),Integer.parseInt(courierIDtxt.getText()));
+				  man.addCourier(employee);
 				  JOptionPane.showMessageDialog(null, employee.showCourierDetails(), "Courier created", 1);
 				  clearCourierForm();
 			  }			  

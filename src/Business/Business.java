@@ -1,5 +1,14 @@
 package Business;
-public class Business
+
+import java.util.List;
+
+import Users.Manager;
+import Users.Person;
+import Users.Purchaser;
+import Works.Order;
+import data.Parcel;
+
+public class Business implements Purchaser
 {
 	private String name;
 	private String address;
@@ -80,7 +89,8 @@ public class Business
 		this.telephone = telephone;
 	}
 
-	public int getCreditCardNumber()
+	@Override
+	public int getCardNumber()
 	{
 		return creditCardNumber;
 	}
@@ -90,19 +100,24 @@ public class Business
 		this.creditCardNumber = creditCardNumber;
 	}
 
+	@Override
 	public void enquireAboutService()
 	{
 
 	}
 
-	public void purchaseService()
+	@Override
+	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person)
 	{
-
+		Order order = new Order(parcels, person, cost, priority);
+		man.addOrder(order);
+		System.out.print("Purchasing Service: " + order.getPriority() + "\n" + order.getPrice());
 	}
 
-	public void specifyDetails()
+	@Override
+	public String specifyDetails()
 	{
-
+		return null;
 	}
 
 	public void logInBusiness()
