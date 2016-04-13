@@ -27,14 +27,42 @@ public class mainActivity {
 	        System.exit(0);
 	      }
 	    });*/
-		testObserverDesignPattern();
+		//testObserverDesignPattern();
 	    manager = new Manager(null, null, null, null, null, null);
-	    testPurchaseService();
+	    //testPurchaseService();
 	    //Thread.sleep(30000);
-	    testAddCourier();
-	    Thread.sleep(180000);
-	    testAssignCourier();
+	    //testAddCourier();
+	    //Thread.sleep(180000);
+	    //testAssignCourier();
+	    testCustomerGui();
+	    testManagerGui();
+	}
 
+	private static void testManagerGui() {
+		// TODO Auto-generated method stub
+		JFrame frame = new JFrame("Manager");
+		frame.setSize(600, 600);
+		frame.addWindowListener(new WindowAdapter() {
+	      public void windowClosing(WindowEvent e) {
+	        System.exit(0);
+	      }
+	    });
+		frame.getContentPane().add(new MainManagerScreen());
+		frame.setVisible(true);
+		
+	}
+
+	private static void testCustomerGui() {
+		// TODO Auto-generated method stub
+		JFrame frame = new JFrame("Customer");
+		frame.setSize(600, 600);
+		frame.addWindowListener(new WindowAdapter() {
+	      public void windowClosing(WindowEvent e) {
+	        System.exit(0);
+	      }
+	    });
+		frame.getContentPane().add(new MainCustomerScreen());
+		frame.setVisible(true);
 	}
 
 	private static void testAssignCourier() {
