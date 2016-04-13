@@ -39,11 +39,6 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		{
 			JFrame frame = new JFrame("Add Courier");
 			frame.setSize(900, 550);
-			frame.addWindowListener(new WindowAdapter() {
-		      public void windowClosing(WindowEvent e) {
-		        System.exit(0);
-		      }
-		    });
 			Manager manager = new Manager(null, null, null, null, null, null);
 			frame.getContentPane().add(new ManagerUI(manager));
 			frame.setVisible(true);
@@ -52,11 +47,6 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		{
 			JFrame frame = new JFrame("Purchase Service");
 			frame.setSize(900, 550);
-			frame.addWindowListener(new WindowAdapter() {
-		      public void windowClosing(WindowEvent e) {
-		        System.exit(0);
-		      }
-		    });
 			Manager manager = new Manager(null, null, null, null, null, null);
 			frame.getContentPane().add(new AssignCourierUI(manager));
 			frame.setVisible(true);

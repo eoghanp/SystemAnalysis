@@ -40,7 +40,7 @@ public class RegisterUI extends JPanel implements ActionListener {
 	
 	
 	
-	public RegisterUI(Customer customer) {
+	public RegisterUI() {
 		setLayout(null);
 		
 		userNameLbl = new JLabel("Email/Username");
@@ -130,6 +130,6 @@ public class RegisterUI extends JPanel implements ActionListener {
 					
 			}
 		}
-	       System.exit(0);
+	      //System.exit(0);
 	}
 }

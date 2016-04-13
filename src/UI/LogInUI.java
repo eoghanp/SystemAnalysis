@@ -2,6 +2,8 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,7 +34,7 @@ public class LogInUI extends JPanel implements ActionListener {
 	
 	
 	
-	public LogInUI(Customer customer) {
+	public LogInUI() {
 		setLayout(null);
 
 		userNameLbl = new JLabel("Username");
@@ -59,11 +62,20 @@ public class LogInUI extends JPanel implements ActionListener {
 		registerBtn = new JButton("Register");
 		registerBtn.setBounds(185, 135, 75, 20);
 		add(registerBtn);
+		registerBtn.addActionListener(this);
+		registerBtn.setActionCommand("Register");
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
+		JFrame frame = new JFrame("MainActivity");
+		frame.setSize(600, 600);
+		frame.addWindowListener(new WindowAdapter() {
+	      public void windowClosing(WindowEvent e) {
+	        System.exit(0);
+	      }
+	    });
 		if ("logIn".equals(evt.getActionCommand())) {
 			String passText = new String(passwordPwd.getPassword());
 			System.out.println(passText);
@@ -94,22 +106,36 @@ public class LogInUI extends JPanel implements ActionListener {
 							{
 								case 0 :
 									System.out.println("You are signed in as the Manager.");
-									JOptionPane.showMessageDialog(null, "You are signed in as the Manager.");
+									//JOptionPane.showMessageDialog(null, "You are signed in as the Manager.");
 									//Execute method
+									
+									frame.getContentPane().add(new MainManagerScreen());
+									frame.setVisible(true);
 									break;
 								
 								case 1 :
 									System.out.println("You are signed in as a Business.");
-									JOptionPane.showMessageDialog(null, "You are signed in as a Business.");
+									//JOptionPane.showMessageDialog(null, "You are signed in as a Business.");
 									//Execute method
+									
+									frame.getContentPane().add(new MainCustomerScreen());
+									frame.setVisible(true);
 									break;
 								
 								case 2 :
 									System.out.println("You are signed in as a Customer.");
-									JOptionPane.showMessageDialog(null, "You are signed in as a Customer.");
+									//JOptionPane.showMessageDialog(null, "You are signed in as a Customer.");
 									//Execute method
+									frame.getContentPane().add(new MainCustomerScreen());
+									frame.setVisible(true);
 									break;
 								
+								case 3 :
+									System.out.println("You are signed in as a Courier");
+									frame.getContentPane().add(new MainCourierScreen());
+									frame.setVisible(true);
+									break;
+									
 								default: 
 									break;
 							}	
@@ -120,6 +146,12 @@ public class LogInUI extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Can't find a text file");
 				}
 			}
-	        System.exit(0);
+		else if ("Register".equals(evt.getActionCommand())) {
+			JFrame frame1 = new JFrame("Register");
+			frame1.setSize(600, 600);
+			frame1.getContentPane().add(new RegisterUI());
+			frame1.setVisible(true);
+		}
+	        //System.exit(0);
 		}
 }

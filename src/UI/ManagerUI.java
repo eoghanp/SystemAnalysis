@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +18,10 @@ import javax.swing.JTextField;
 import Users.Manager;
 import data.Parcel;
 import Users.Courier;
+import Users.LoginDetails;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.*;
 
 public class ManagerUI extends JPanel implements ActionListener
@@ -109,6 +117,27 @@ public class ManagerUI extends JPanel implements ActionListener
 			  else{
 				  Courier employee = new Courier(courierFirstNametxt.getText(),courierLastNametxt.getText(),emailtxt.getText(),passwordtxt.getText(),addresstxt.getText(),contacttxt.getText(),Integer.parseInt(courierIDtxt.getText()));
 				  man.addCourier(employee);
+				  
+					FileWriter aFileWriter = null;
+					try {
+						aFileWriter = new FileWriter("login.txt", true);
+						//aFileWriter = new FileWriter("login2.txt");
+						
+						PrintWriter out = new PrintWriter(aFileWriter);
+
+						Scanner in = new Scanner(System.in);
+						
+						System.out.println("3" + "," + emailtxt.getText() + 
+								 "," + passwordtxt.getText());
+							
+						out.println("3" + "," + emailtxt.getText() + 
+								 "," + passwordtxt.getText());
+
+						aFileWriter.close();
+						out.close();
+					} catch (IOException e) {
+							
+					}
 				  JOptionPane.showMessageDialog(null, employee.showCourierDetails(), "Courier created", 1);
 				  clearCourierForm();
 			  }			  

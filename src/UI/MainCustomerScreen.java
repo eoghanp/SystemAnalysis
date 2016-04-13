@@ -44,11 +44,6 @@ public class MainCustomerScreen  extends JPanel implements ActionListener{
 		{
 			JFrame frame = new JFrame("Purchase Service");
 			frame.setSize(900, 550);
-			frame.addWindowListener(new WindowAdapter() {
-		      public void windowClosing(WindowEvent e) {
-		        System.exit(0);
-		      }
-		    });
 			Manager manager = new Manager(null, null, null, null, null, null);
 			Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
 			frame.getContentPane().add(new CustomerUI(customer, manager));

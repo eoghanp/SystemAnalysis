@@ -34,8 +34,23 @@ public class mainActivity {
 	    //testAddCourier();
 	    //Thread.sleep(180000);
 	    //testAssignCourier();
-	    testCustomerGui();
-	    testManagerGui();
+	   // testCustomerGui();
+	    //testManagerGui();
+	    testLogin();
+	}
+
+	private static void testLogin() {
+		// TODO Auto-generated method stub
+		JFrame frame = new JFrame("Login");
+		frame.setSize(600, 600);
+		frame.addWindowListener(new WindowAdapter() {
+	      public void windowClosing(WindowEvent e) {
+	        System.exit(0);
+	      }
+	    });
+		
+		frame.getContentPane().add(new LogInUI());
+		frame.setVisible(true);
 	}
 
 	private static void testManagerGui() {

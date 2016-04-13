@@ -1,1 +1,8 @@
-UnitedParcelService@UPS.ie,ups123
+0,nnn,nnn
+2,ccc,ccc
+1,eee,eee
+0,ggg,ggg
+3,aaa,aaa
+0,manager,manager
+2,Customer,customer
+3,courier,courier
