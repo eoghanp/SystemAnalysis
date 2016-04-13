@@ -1,0 +1,19 @@
+Delivery Completed Successfully
+Delivery not completed
+DELIVERY REPORT
+
+Report ID: 1
+Delivery Status: null
+Delivery Time: 
+Number of Dispatches: 0
+Customer Name: 
+Customer Signature: null
+CourierName: 
+Courier Signiture: null
+Recipient Name: 
+Recipient Signature: null
+Manager Name: 
+Manager Signature: null
+
+2016/04/13 15:41:50
+Company Name

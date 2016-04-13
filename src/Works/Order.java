@@ -26,7 +26,7 @@ public class Order implements Job{
 		this.priority = 3;
 		this.status = 0;
 		this.price = price;
-		this.report = new Report();
+		this.report = new Report(this);
 	}
 	
 	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority){
@@ -35,7 +35,7 @@ public class Order implements Job{
 		this.priority = priority;
 		this.status = 0;
 		this.price = price;
-		this.report = new Report();
+		this.report = new Report(this);
 	}
 	
 	public void addParcel(Parcel p){
@@ -100,6 +100,14 @@ public class Order implements Job{
 
 	public int getStatus(){
 		return this.status;
+	}
+	
+	public void setReport(Report r){
+		this.report = r;
+	}
+	
+	public Report getReport(){
+		return this.report;
 	}
 	
 }

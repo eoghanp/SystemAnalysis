@@ -30,7 +30,7 @@ public class LogInUI extends JPanel implements ActionListener {
 	
 	
 	
-	public LogInUI(Customer customer) {
+	public LogInUI() {
 		setLayout(null);
 
 		userNameLbl = new JLabel("Username");
