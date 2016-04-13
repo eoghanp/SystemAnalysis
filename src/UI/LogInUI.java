@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import Users.Customer;
 import Users.Courier;
 import Users.Manager;
+import Users.LoginDetails;
 
 public class LogInUI extends JPanel implements ActionListener {
 
@@ -30,7 +31,7 @@ public class LogInUI extends JPanel implements ActionListener {
 	
 	
 	
-	public LogInUI() {
+	public LogInUI(Customer customer) {
 		setLayout(null);
 
 		userNameLbl = new JLabel("Username");
@@ -66,34 +67,59 @@ public class LogInUI extends JPanel implements ActionListener {
 		if ("logIn".equals(evt.getActionCommand())) {
 			String passText = new String(passwordPwd.getPassword());
 			System.out.println(passText);
-			if ((!(userNameTxt.getText().equals(""))) && (!(passText.equals("")))) {
-				ArrayList<String> loginCredentials = new ArrayList<String>();
 				try {
 					File loginFile = new File("login.txt");
 					Scanner aFileScanner = new Scanner(loginFile);	
 					String aLineFromFile;
-					boolean loggedIn = false;
 					
-					while ((!loggedIn) && aFileScanner.hasNext()) {
+					ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
+					//int i = 0;
+					while (aFileScanner.hasNext()) {
 						aLineFromFile = aFileScanner.nextLine();
 						String details[] = aLineFromFile.split(",");
 						
-						if (userNameTxt.getText().equalsIgnoreCase(details[0]) && passText.equals(details[1])) {
-							JOptionPane.showMessageDialog(null, "Logged in!");
-							loggedIn = true; break;
+						int loginType = Integer.parseInt(details[0]);
+						String userName = details[1];
+						String password = details[2];
+						
+						LoginDetails addLoginDetails = new LoginDetails(loginType, userName, password);
+
+						loginDetailsList.add(addLoginDetails);
+					}
+					boolean loggedIn = true;
+					int i = 0;
+					while (i < loginDetailsList.size()) {
+						if (userNameTxt.getText().equalsIgnoreCase(loginDetailsList.get(i).getUserName()) && passText.equals(loginDetailsList.get(i).getPassword())) {
+							switch(loginDetailsList.get(i).getLoginType())
+							{
+								case 0 :
+									System.out.println("You are signed in as the Manager.");
+									JOptionPane.showMessageDialog(null, "You are signed in as the Manager.");
+									//Execute method
+									break;
+								
+								case 1 :
+									System.out.println("You are signed in as a Business.");
+									JOptionPane.showMessageDialog(null, "You are signed in as a Business.");
+									//Execute method
+									break;
+								
+								case 2 :
+									System.out.println("You are signed in as a Customer.");
+									JOptionPane.showMessageDialog(null, "You are signed in as a Customer.");
+									//Execute method
+									break;
+								
+								default: 
+									break;
+							}	
 						}
-						else if ((!(userNameTxt.getText().equalsIgnoreCase(details[0])) && (!(passText.equals(details[1]))))) {
-							JOptionPane.showMessageDialog(null, "Incorrect Username/Password.");
-						}
+						++i;
 					}
 				} catch (FileNotFoundException fileNotFound) {
 					JOptionPane.showMessageDialog(null, "Can't find a text file");
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Enter a username and password.");
 			}
-		} else {
 	        System.exit(0);
 		}
-	}
 }
