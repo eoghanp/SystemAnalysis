@@ -10,7 +10,9 @@ import javax.swing.*;
 
 import Users.Customer;
 import Users.Manager;
+import Vehicle.Vehicle;
 import data.Parcel;
+import route.Route;
 
 public class mainActivity {
 
@@ -25,7 +27,7 @@ public class mainActivity {
 	        System.exit(0);
 	      }
 	    });*/
-
+		testObserverDesignPattern();
 	    manager = new Manager(null, null, null, null, null, null);
 	    testPurchaseService();
 	    //Thread.sleep(30000);
@@ -75,5 +77,14 @@ public class mainActivity {
 		addCourierFrame.getContentPane().add(new ManagerUI(manager));
 		addCourierFrame.setVisible(true);
 	}
+	
+	private static void testObserverDesignPattern(){
+		Route aRoute = new Route(0, "null");
+		Vehicle aVehicle = new Vehicle("null",0.0,null,null,null);
+		aVehicle.registerObserver(aRoute);
+		aVehicle.setLocation("Limerick");
+		aVehicle.setLocation("Offaly");
+	}
+
 	
 }

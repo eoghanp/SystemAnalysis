@@ -3,13 +3,19 @@ package route;
 import java.util.ArrayList;
 import java.util.List;
 
+//import UI.Route;
 import Vehicle.Vehicle;
 import Works.Job;
 import Works.Order;
 import data.Parcel;
+//import java.util.Observer;
 
-public class Route {
+interface Observer{
+	public void update(String location);
+}
 
+public class Route implements Observer{
+	
 	//the route id of the the route
 	private int routeId;
 	private String routeDetails; //the details of the destinations
@@ -20,6 +26,7 @@ public class Route {
 	public Route(int routeId, String routeDetails) {
 		this.routeId = routeId;
 		this.routeDetails = routeDetails;
+		System.out.println("Route created");
 	}
 
 	public int getRouteId() {
@@ -56,5 +63,10 @@ public class Route {
 	
 	public int getDistance(){
 		return this.distance;
+	}
+	
+	@Override
+	public void update(String location){
+		System.out.println("Route: location is now: " + location);
 	}
 }
