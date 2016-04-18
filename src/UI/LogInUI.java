@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import dataIO.DBHandler;
 import Users.PersonCustomer;
 import Users.Courier;
 import Users.Manager;
@@ -79,79 +80,52 @@ public class LogInUI extends JPanel implements ActionListener {
 		if ("logIn".equals(evt.getActionCommand())) {
 			String passText = new String(passwordPwd.getPassword());
 			System.out.println(passText);
-				try {
-					File loginFile = new File("login.txt");
-					Scanner aFileScanner = new Scanner(loginFile);	
-					String aLineFromFile;
-					
-					ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
-					//int i = 0;
-					while (aFileScanner.hasNext()) {
-						aLineFromFile = aFileScanner.nextLine();
-						String details[] = aLineFromFile.split(",");
-						
-						int loginType = Integer.parseInt(details[0]);
-						String userName = details[1];
-						String password = details[2];
-						
-						LoginDetails addLoginDetails = new LoginDetails(loginType, userName, password);
-
-						loginDetailsList.add(addLoginDetails);
-					}
-					boolean loggedIn = true;
-					int i = 0;
-					while (i < loginDetailsList.size()) {
-						if (userNameTxt.getText().equalsIgnoreCase(loginDetailsList.get(i).getUserName()) && passText.equals(loginDetailsList.get(i).getPassword())) {
-							switch(loginDetailsList.get(i).getLoginType())
-							{
-								case 0 :
-									System.out.println("You are signed in as the Manager.");
-									//JOptionPane.showMessageDialog(null, "You are signed in as the Manager.");
-									//Execute method
+			
+			if (DBHandler.loginUser(userNameTxt.getText(), new String(passwordPwd.getPassword()))) {
+				switch(DBHandler.retrieveLoginType()) {
+				
+				case 0 :
+					System.out.println("You are signed in as the Manager.");
+					//JOptionPane.showMessageDialog(null, "You are signed in as the Manager.");
+					//Execute method
 									
-									frame.getContentPane().add(new MainManagerScreen());
-									frame.setVisible(true);
-									break;
+					frame.getContentPane().add(new MainManagerScreen());
+					frame.setVisible(true);
+					break;
 								
-								case 1 :
-									System.out.println("You are signed in as a Business.");
-									//JOptionPane.showMessageDialog(null, "You are signed in as a Business.");
-									//Execute method
+				case 1 :
+					System.out.println("You are signed in as a Business.");
+					//JOptionPane.showMessageDialog(null, "You are signed in as a Business.");
+					//Execute method
 									
-									frame.getContentPane().add(new MainCustomerScreen());
-									frame.setVisible(true);
-									break;
+					frame.getContentPane().add(new MainCustomerScreen());
+					frame.setVisible(true);
+					break;
 								
-								case 2 :
-									System.out.println("You are signed in as a Customer.");
-									//JOptionPane.showMessageDialog(null, "You are signed in as a Customer.");
-									//Execute method
-									frame.getContentPane().add(new MainCustomerScreen());
-									frame.setVisible(true);
-									break;
+				case 2 :
+					System.out.println("You are signed in as a Customer.");
+					//JOptionPane.showMessageDialog(null, "You are signed in as a Customer.");
+					//Execute method
+					frame.getContentPane().add(new MainCustomerScreen());
+					frame.setVisible(true);
+					break;
 								
-								case 3 :
-									System.out.println("You are signed in as a Courier");
-									frame.getContentPane().add(new MainCourierScreen());
-									frame.setVisible(true);
-									break;
+				case 3 :
+					System.out.println("You are signed in as a Courier");
+					frame.getContentPane().add(new MainCourierScreen());
+					frame.setVisible(true);
+					break;
 									
-								default: 
-									break;
-							}	
-						}
-						++i;
-					}
-				} catch (FileNotFoundException fileNotFound) {
-					JOptionPane.showMessageDialog(null, "Can't find a text file");
+				default: 
+					break;
 				}
 			}
+		}
 		else if ("Register".equals(evt.getActionCommand())) {
 			JFrame frame1 = new JFrame("Register");
 			frame1.setSize(600, 600);
 			frame1.getContentPane().add(new RegisterUI());
 			frame1.setVisible(true);
 		}
-	        //System.exit(0);
-		}
+	}
 }

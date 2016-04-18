@@ -11,11 +11,12 @@ import java.io.IOException;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import route.Route;
-
 import Business.BusinessCustomer;
 import Users.Courier;
+import Users.LoginDetails;
 import Users.PersonCustomer;
 import Users.Manager;
 import Users.Person;
@@ -27,6 +28,81 @@ import Works.Order;
 import parcel.Parcel;
 
 public class DBHandler {
+	
+	private static ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
+	private static int l = 0;
+	
+	public static boolean loginUser(String email, String password) {
+		try {
+			File loginFile = new File("login.txt");
+			Scanner aFileScanner = new Scanner(loginFile);	
+			String aLineFromFile;
+
+			while (aFileScanner.hasNext()) {
+				aLineFromFile = aFileScanner.nextLine();
+				String details[] = aLineFromFile.split(",");
+				
+				int loginType = Integer.parseInt(details[0]);
+				String userName = details[1];
+				String passwordList = details[2];
+				
+				LoginDetails addLoginDetails = new LoginDetails(loginType, userName, passwordList);
+
+				loginDetailsList.add(addLoginDetails);
+			}
+			
+			while (l < loginDetailsList.size()) {
+				if (email.equalsIgnoreCase(loginDetailsList.get(l).getUserName()) && 
+						password.equals(loginDetailsList.get(l).getPassword())) {
+					return true;
+				}
+				++l;
+			}
+		} catch (FileNotFoundException fileNotFound) {
+			fileNotFound.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static int retrieveLoginType() {
+		return loginDetailsList.get(l).getLoginType();
+	}
+	
+	public boolean isValidLogin(String email, String password) 
+	{
+		if(email == null && password == null) {
+			return false;
+		}
+
+		try {
+			File loginFile = new File("login.txt");
+			Scanner aFileScanner = new Scanner(loginFile);	
+			String aLineFromFile;
+
+			while (aFileScanner.hasNext()) {
+				aLineFromFile = aFileScanner.nextLine();
+				String details[] = aLineFromFile.split(",");
+				
+				int loginType = Integer.parseInt(details[0]);
+				String userName = details[1];
+				String passwordList = details[2];
+				
+				LoginDetails addLoginDetails = new LoginDetails(loginType, userName, passwordList);
+
+				loginDetailsList.add(addLoginDetails);
+			}
+		} catch (FileNotFoundException fileNotFound) {
+			fileNotFound.printStackTrace();
+		}
+		
+		for(int j = 0; j < loginDetailsList.size(); j++) {
+			if (email.equalsIgnoreCase(loginDetailsList.get(j).getUserName()) && 
+					password.equals(loginDetailsList.get(j).getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void saveBusiness(BusinessCustomer business)
 	{
