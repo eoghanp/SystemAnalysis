@@ -19,12 +19,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Manager;
 import Users.Person;
-import Users.Purchaser;
-import data.Calculator;
-import data.Parcel;
+import Users.Customer;
+import calculator.Calculator;
+import parcel.Parcel;
 
 public class CustomerUI extends JPanel implements ActionListener {
 
@@ -46,11 +46,11 @@ public class CustomerUI extends JPanel implements ActionListener {
   protected String options[] = {"standard", "fast"};
   protected List<Parcel> l = new ArrayList<Parcel>();
   
-  protected Purchaser cust;
+  protected Customer cust;
   protected Manager man;
   protected Calculator c = new Calculator();
   
-  public CustomerUI(Customer customer, Manager manager) {
+  public CustomerUI(PersonCustomer customer, Manager manager) {
 	  man = manager;
 	  cust = customer;
 	  

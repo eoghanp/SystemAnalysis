@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Manager;
 
 public class MainCustomerScreen  extends JPanel implements ActionListener{
@@ -45,7 +45,7 @@ public class MainCustomerScreen  extends JPanel implements ActionListener{
 			JFrame frame = new JFrame("Purchase Service");
 			frame.setSize(900, 550);
 			Manager manager = new Manager(null, null, null, null, null, null);
-			Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
+			PersonCustomer customer = new PersonCustomer(null, null, null, null, null, null, 0, 0);
 			frame.getContentPane().add(new CustomerUI(customer, manager));
 			frame.setVisible(true);
 		}

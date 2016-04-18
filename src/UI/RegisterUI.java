@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Courier;
 import Users.Manager;
 import Users.LoginDetails;

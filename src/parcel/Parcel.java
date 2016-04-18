@@ -1,4 +1,4 @@
-package data;
+package parcel;
 
 public class Parcel {
 

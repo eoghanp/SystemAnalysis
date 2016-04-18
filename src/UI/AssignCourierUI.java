@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import Users.Courier;
 import Users.Manager;
 import Works.Order;
-import data.Calculator;
+import calculator.Calculator;
 import route.Route;
 
 public class AssignCourierUI extends JPanel implements ActionListener {

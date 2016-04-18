@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Vehicle.Vehicle;
+import Vehicle.SmallVan;
 import route.Route;
 
 public class MainCourierScreen extends JPanel implements ActionListener{
@@ -36,7 +36,7 @@ public class MainCourierScreen extends JPanel implements ActionListener{
 		if ("Sign off".equals(e.getActionCommand())) 
 		{
 			Route aRoute = new Route(0, "null");
-			Vehicle aVehicle = new Vehicle("null",0.0,null,null,null);
+			SmallVan aVehicle = new SmallVan("null",0.0,null,null,null);
 			aVehicle.registerObserver(aRoute);
 			aVehicle.setLocation("Limerick");
 			aVehicle.setLocation("Offaly");

@@ -1,11 +1,12 @@
-package data;
+package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Vehicle.Vehicle;
+import Vehicle.VehicleFactory;
 import Works.Job;
 import Works.Order;
+import parcel.Parcel;
 import route.Route;
 
 public class Calculator {
@@ -66,6 +67,7 @@ public class Calculator {
 		List<Route> routes = new ArrayList<Route>();
 		String descriptions[] = {"North", "South", "East", "West", "Central"};
 		String models[] = {"Ford S-Max", "Toyoto Hiace", "Volkswagon Caddy"};
+		String vehicles[] = {"smallvan", "largevan", "smalllorry", "largelorry"};
 		int a = 0, numRoutes = listOfOrders.size()/5;
 		if (listOfOrders.size()%5 != 0)
 			numRoutes++;
@@ -77,11 +79,11 @@ public class Calculator {
 			}
 		}
 		
-		
+		VehicleFactory vf = new VehicleFactory();
 		for (int i = 0; i < routes.size(); i++){
 			routes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);
 			routes.get(i).setDistance((((int)(Math.random()*400) + 50)));//use order details in future
-			routes.get(i).assignVehicle(new Vehicle(models[((int)(Math.random() * 3))], i, null, null, null));//more complex in future - use parcel requirements
+			routes.get(i).assignVehicle(vf.getVehicle(vehicles[((int)(Math.random() * 3))]));//more complex in future - use parcel requirements
 		}
 		
 		return routes;

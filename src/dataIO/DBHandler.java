@@ -14,20 +14,21 @@ import java.util.List;
 
 import route.Route;
 
-import Business.Business;
+import Business.BusinessCustomer;
 import Users.Courier;
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Manager;
 import Users.Person;
 import Users.Recipient;
+import Vehicle.SmallVan;
 import Vehicle.Vehicle;
 import Works.Job;
 import Works.Order;
-import data.Parcel;
+import parcel.Parcel;
 
 public class DBHandler {
 	
-	public void saveBusiness(Business business)
+	public void saveBusiness(BusinessCustomer business)
 	{
 		String data = "";
 		data += business.getAddress() + "|";
@@ -59,9 +60,9 @@ public class DBHandler {
     	}
 	}
 	
-	List<Business> getBusiness() throws IOException
+	List<BusinessCustomer> getBusiness() throws IOException
 	{
-		List<Business> business = new ArrayList<Business>();
+		List<BusinessCustomer> business = new ArrayList<BusinessCustomer>();
 		try {
 			FileReader fr = new FileReader("buisness.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -86,7 +87,7 @@ public class DBHandler {
 				Name=tokens[5];
 				Telephone=Integer.parseInt(tokens[6]);
 				
-				Business businesses = new Business(Name, Address, Email, BusinessCard, Telephone, CardNumber);
+				BusinessCustomer businesses = new BusinessCustomer(Name, Address, Email, BusinessCard, Telephone, CardNumber);
 				business.add(businesses);			
 			}			
 		} catch (FileNotFoundException e) {
@@ -281,7 +282,7 @@ public class DBHandler {
 		return couriers;
 	}
 	
-	public void saveCustomer(Customer customer)
+	public void saveCustomer(PersonCustomer customer)
 	{
 		String data ="";
 
@@ -313,9 +314,9 @@ public class DBHandler {
     	}
 	}
 	
-	List<Customer> getCustomer() throws IOException
+	List<PersonCustomer> getCustomer() throws IOException
 	{
-		List<Customer> customers = new ArrayList<Customer>();
+		List<PersonCustomer> customers = new ArrayList<PersonCustomer>();
 		try {
 			FileReader fr = new FileReader("customer.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -334,7 +335,7 @@ public class DBHandler {
 				String telephone=tokens[4];
 				int card=Integer.parseInt(tokens[5]);
 				
-				Customer customer = new Customer(first, last, email, "", address, telephone, id, card);
+				PersonCustomer customer = new PersonCustomer(first, last, email, "", address, telephone, id, card);
 				customers.add(customer);			
 			}			
 		} catch (FileNotFoundException e) {
@@ -491,7 +492,7 @@ public class DBHandler {
 				dim[3]=height;
 				weight=Double.parseDouble(tokens[1]);
 				
-				Vehicle vehicle = new Vehicle(model, weight, dim, feature, classification);
+				Vehicle vehicle = new SmallVan(model, weight, dim, feature, classification);
 				vehicles.add(vehicle);			
 			}			
 		} catch (FileNotFoundException e) {

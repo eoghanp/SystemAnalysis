@@ -5,7 +5,7 @@ import java.util.List;
 
 import Report.Report;
 import Users.Recipient;
-import data.Parcel;
+import parcel.Parcel;
 
 public class Order implements Job{
 	

@@ -7,8 +7,7 @@ import java.util.List;
 import Vehicle.Vehicle;
 import Works.Job;
 import Works.Order;
-import data.Parcel;
-//import java.util.Observer;
+import parcel.Parcel;
 
 interface Observer{
 	public void update(String location);
@@ -41,8 +40,8 @@ public class Route implements Observer{
 		this.routeDetails = routeDetails;
 	};
 	
-	public void assignVehicle(Vehicle vehicle){
-		this.vehicle = vehicle;
+	public void assignVehicle(Vehicle vehicle2){
+		this.vehicle = vehicle2;
 	}
 	
 	public Vehicle getVehicle(){

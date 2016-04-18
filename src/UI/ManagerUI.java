@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Users.Manager;
-import data.Parcel;
+import parcel.Parcel;
 import Users.Courier;
 import Users.LoginDetails;
 

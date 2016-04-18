@@ -4,11 +4,11 @@ import java.util.List;
 
 import Users.Manager;
 import Users.Person;
-import Users.Purchaser;
+import Users.Customer;
 import Works.Order;
-import data.Parcel;
+import parcel.Parcel;
 
-public class Business implements Purchaser
+public class BusinessCustomer implements Customer
 {
 	private String name;
 	private String address;
@@ -17,7 +17,7 @@ public class Business implements Purchaser
 	private int telephone;
 	private int creditCardNumber;
 
-	public Business(String name, String address, String email,
+	public BusinessCustomer(String name, String address, String email,
 		String businessCard, int telephone, int creditCardNumber)
 	{
 		this.name = name;

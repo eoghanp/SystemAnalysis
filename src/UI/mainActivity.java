@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.*;
 import javax.swing.*;
 
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Manager;
+import Vehicle.SmallVan;
 import Vehicle.Vehicle;
-import data.Parcel;
+import Vehicle.VehicleFactory;
+import parcel.Parcel;
 import route.Route;
 
 public class mainActivity {
@@ -37,6 +39,12 @@ public class mainActivity {
 	   // testCustomerGui();
 	    //testManagerGui();
 	    testLogin();
+	    /*VehicleFactory vf = new VehicleFactory();
+	    Vehicle v1 = vf.getVehicle("smallvan");
+	    Vehicle v2 = vf.getVehicle("largevan");
+	    Vehicle v3 = vf.getVehicle("smalllorry");
+	    Vehicle v4 = vf.getVehicle("largelorry");*/
+	    
 	}
 
 	private static void testLogin() {
@@ -100,7 +108,7 @@ public class mainActivity {
 	        System.exit(0);
 	      }
 	    });
-		Customer customer = new Customer(null, null, null, null, null, null, 0, 0);
+		PersonCustomer customer = new PersonCustomer(null, null, null, null, null, null, 0, 0);
 		frame.getContentPane().add(new CustomerUI(customer, manager));
 		frame.setVisible(true);
 		
@@ -123,7 +131,7 @@ public class mainActivity {
 	
 	private static void testObserverDesignPattern(){
 		Route aRoute = new Route(0, "null");
-		Vehicle aVehicle = new Vehicle("null",0.0,null,null,null);
+		SmallVan aVehicle = new SmallVan("null",0.0,null,null,null);
 		aVehicle.registerObserver(aRoute);
 		aVehicle.setLocation("Limerick");
 		aVehicle.setLocation("Offaly");

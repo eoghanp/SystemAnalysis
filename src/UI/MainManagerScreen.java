@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Users.Customer;
+import Users.PersonCustomer;
 import Users.Manager;
 
 public class MainManagerScreen extends JPanel implements ActionListener{
@@ -30,6 +30,18 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		add(purchaseButton);
 		purchaseButton.addActionListener(this);
 		purchaseButton.setActionCommand("Assign Couriers");
+		
+		JButton reviewButton = new JButton("Review Deliveries");
+		reviewButton.setBounds(20, 350, 150, 25);
+		add(reviewButton);
+		reviewButton.addActionListener(this);
+		reviewButton.setActionCommand("Review Deliveries");
+		
+		JButton DBButton = new JButton("View Database");
+		DBButton.setBounds(330, 350, 150, 25);
+		add(DBButton);
+		DBButton.addActionListener(this);
+		DBButton.setActionCommand("View Database");
 	}
 
 	@Override
