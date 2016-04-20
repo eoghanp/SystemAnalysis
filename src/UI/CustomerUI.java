@@ -202,7 +202,7 @@ public void actionPerformed(ActionEvent evt) {
 	  if ("purchase".equals(evt.getActionCommand())) {
 		  if (l.size() != 0 && (!(collectiontxt.getText().equals(""))) && (!(receipientNametxt.getText().equals(""))) && (!(receipientAddrtxt.getText().equals(""))) && (!(receipientPhonetxt.getText().equals("")))){
 			  double cost = c.getDeliveryCost(l, deliveryOptions.getSelectedIndex());
-			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex(), man, new Person(receipientNametxt.getText(), receipientNametxt.getText(), null, null, receipientAddrtxt.getText(), receipientPhonetxt.getText()));
+			  cust.purchaseService(l, cost, deliveryOptions.getSelectedIndex(), man, new Person(receipientNametxt.getText(), receipientNametxt.getText(), null, null, receipientAddrtxt.getText(), receipientPhonetxt.getText()), collectiontxt.getText());
 			  System.out.println(collectiontxt.getText());
 			  
 			  collectiontxt.setText(null);

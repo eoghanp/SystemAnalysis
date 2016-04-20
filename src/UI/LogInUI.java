@@ -132,7 +132,7 @@ public class LogInUI extends JPanel implements ActionListener {
 								
 								case 3 :
 									System.out.println("You are signed in as a Courier");
-									frame.getContentPane().add(new MainCourierScreen());
+									frame.getContentPane().add(new MainCourierScreen(new Courier(null, null, null, null, null, null, 1)));
 									frame.setVisible(true);
 									break;
 									

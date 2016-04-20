@@ -18,23 +18,17 @@ public class Order implements Job{
 	boolean paid;
 	int status;
 	Report report;
+	String collectionAddress;
 	//enum status {withCustomer, withCourier, delivered};
 	
-	public Order(List<Parcel> parcels, Recipient recipient, double price){
-		this.parcels = parcels;
-		this.recipientDetails = recipient;
-		this.priority = 3;
-		this.status = 0;
-		this.price = price;
-		this.report = new Report(this);
-	}
 	
-	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority){
+	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority, String addr){
 		this.parcels = parcels;
 		this.recipientDetails = recipient;
 		this.priority = priority;
 		this.status = 0;
 		this.price = price;
+		this.collectionAddress = addr;
 		this.report = new Report(this);
 	}
 	
@@ -108,6 +102,15 @@ public class Order implements Job{
 	
 	public Report getReport(){
 		return this.report;
+	}
+	
+	public void setCollectionAddress(String addr){
+		this.collectionAddress = addr;
+	}
+	
+	@Override
+	public String getCollectionAddress(){
+		return this.collectionAddress;
 	}
 	
 }

@@ -107,9 +107,9 @@ public class BusinessCustomer implements Customer
 	}
 
 	@Override
-	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person)
+	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person, String addr)
 	{
-		Order order = new Order(parcels, person, cost, priority);
+		Order order = new Order(parcels, person, cost, priority, addr);
 		man.addOrder(order);
 		System.out.print("Purchasing Service: " + order.getPriority() + "\n" + order.getPrice());
 	}
@@ -129,4 +129,5 @@ public class BusinessCustomer implements Customer
 	{
 
 	}
+
 }

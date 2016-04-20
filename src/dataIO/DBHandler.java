@@ -206,7 +206,7 @@ public class DBHandler {
 				
 				
 				Recipient rec = new Person(first, last, "", "", add, phone);
-				Order order = new Order(parcel, rec, priority);
+				Order order = new Order(parcel, rec, priority, 1, null);
 				orders.add(order);			
 			}			
 		} catch (FileNotFoundException e) {
