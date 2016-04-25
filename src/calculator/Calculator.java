@@ -70,6 +70,12 @@ public class Calculator {
 	}
 	
 	public List<Route> calculateRoutes(List<Order> listOfOrders){
+		RoutingInterface routingAlgoritm1 = new RoutingAlgorithm1();
+		RoutingInterface routingAlgoritm2 = new RoutingAlgorithm2();
+		Thread r1 = (Thread) routingAlgoritm1;
+		Thread r2 = (Thread) routingAlgoritm2;
+		r1.start();
+		r2.start();
 		List<Route> routes = new ArrayList<Route>();
 		String descriptions[] = {"North", "South", "East", "West", "Central"};
 		String models[] = {"Ford S-Max", "Toyoto Hiace", "Volkswagon Caddy"};
@@ -78,7 +84,7 @@ public class Calculator {
 		if (listOfOrders.size()%5 != 0)
 			numRoutes++;
 		for (int i = 0; i < numRoutes; i++){
-			DBHandler db = new DBHandler();
+			DBHandler db = DBHandler.getSingletonInstance();
 			int max = 0;
 			try {
 				List<Route> c = db.getRoutes();
@@ -96,7 +102,7 @@ public class Calculator {
 			}
 		}
 		
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		VehicleFactory vf = new VehicleFactory();
 		for (int i = 0; i < routes.size(); i++){
 			routes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);

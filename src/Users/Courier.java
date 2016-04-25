@@ -16,7 +16,7 @@ public class Courier extends Person {
 	public Courier(String first, String last, String mail, String pass, String add, String phone)
 	{
 		super(first, last, mail, pass, add, phone);
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		int max = 0;
 		try {
 			List<Courier> c = db.getCourier();
@@ -80,7 +80,7 @@ public class Courier extends Person {
 	}*/
 
 	public void getSchedule(){
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		this.route = db.getSpecificRoute(this.courierID);
 	}
 	

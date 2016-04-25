@@ -31,7 +31,7 @@ public class ReviewJobsUI extends JPanel implements ActionListener{
 		setLayout(null);
 		man = manager;
 		
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		try {
 			
 			jobs = db.getOrder();

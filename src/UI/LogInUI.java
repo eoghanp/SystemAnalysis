@@ -112,7 +112,7 @@ public class LogInUI extends JPanel implements ActionListener {
 								
 				case 3 :
 					System.out.println("You are signed in as a Courier");
-					DBHandler db = new DBHandler();
+					DBHandler db = DBHandler.getSingletonInstance();
 					db.getThisCourier(userNameTxt.getText(), new String(passwordPwd.getPassword()));
 					frame.getContentPane().add(new MainCourierScreen(db.getThisCourier(userNameTxt.getText(), new String(passwordPwd.getPassword()))));
 					frame.setVisible(true);

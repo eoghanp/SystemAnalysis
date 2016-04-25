@@ -26,7 +26,7 @@ public class Manager extends Person{
 	public Manager(String first, String last, String mail, String pass, String add, String phone)
 	{
 		super(first, last, mail, pass, add, phone);
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		try {
 			listOfCouriers = db.getCourier();
 			listOfOrders = db.getOrder();
@@ -71,7 +71,7 @@ public class Manager extends Person{
 		} catch (IOException e) {
 				
 		}
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		db.saveCourier(c);
 	}
 	

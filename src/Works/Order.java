@@ -34,7 +34,7 @@ public class Order implements Job{
 		this.price = price;
 		this.collectionAddress = addr;
 		this.report = new Report(this);
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		int max = 0;
 		try {
 			List<Order> c = db.getOrder();

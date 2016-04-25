@@ -10,3 +10,6 @@
 10|West|Vehicle.SmallLorry@149eef3|264|1,
 11|East|Vehicle.SmallVan@50c2e9d1|365|1,
 12|West|Vehicle.SmallLorry@474d9a0a|326|1,
+13|East|Vehicle.LargeVan@32da5a84|149|1,
+14|East|Vehicle.LargeVan@4919860e|110|1,
+15|North|Vehicle.SmallVan@25bcb56b|202|1,

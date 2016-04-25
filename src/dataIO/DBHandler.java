@@ -30,8 +30,15 @@ import parcel.Parcel;
 
 public class DBHandler {
 	
+	private static DBHandler singletonInstance;
 	private static ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
 	private static int l = 0;
+	
+	public static DBHandler getSingletonInstance(){
+		if(singletonInstance == null)
+			singletonInstance = new DBHandler();
+		return singletonInstance;
+	}
 	
 	public static boolean loginUser(String email, String password) {
 		try {

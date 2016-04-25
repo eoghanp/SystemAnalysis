@@ -111,7 +111,7 @@ public class BusinessCustomer implements Customer
 	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person, String addr)
 	{
 		Order order = new Order(parcels, person, cost, priority, addr);
-		DBHandler db = new DBHandler();
+		DBHandler db = DBHandler.getSingletonInstance();
 		db.saveOrder(order);
 		man.addOrder(order);
 		System.out.print("Purchasing Service: " + order.getPriority() + "\n" + order.getPrice());

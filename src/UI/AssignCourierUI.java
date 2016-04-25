@@ -72,7 +72,7 @@ public class AssignCourierUI extends JPanel implements ActionListener {
 			if (availableCouriers.getSelectedIndex() >= 0 && table.getSelectedRow() >= 0){
 				int a = availableCouriers.getSelectedIndex(), b = table.getSelectedRow();
 				courierList.get(a).setRoute(routes.get(b));
-				DBHandler db = new DBHandler();
+				DBHandler db = DBHandler.getSingletonInstance();
 				db.assignRoute(courierList.get(a).getCourierID(), routes.get(b).getRouteId());
 				assignedTxt += routes.get(b).getRouteId() + ": " + routes.get(b).getRouteDetails() + " assigned to " + courierList.get(a).getName() + "\n";
 				availableCouriers.removeItemAt(a);
