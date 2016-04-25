@@ -1,32 +1,23 @@
 package UI;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Users.PersonCustomer;
 import dataIO.DBHandler;
-import Users.Courier;
 import Users.Customer;
-import Users.Manager;
 import Users.LoginDetails;
 
 public class RegisterUI extends JPanel implements ActionListener {
@@ -118,7 +109,6 @@ public class RegisterUI extends JPanel implements ActionListener {
 				
 				PrintWriter out = new PrintWriter(aFileWriter);
 
-				Scanner in = new Scanner(System.in);
 				
 				LoginDetails addLoginDetails = new LoginDetails(loginType, userName, passText);
 				loginDetailsList.add(addLoginDetails);

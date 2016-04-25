@@ -4,11 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,10 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dataIO.DBHandler;
-import Users.PersonCustomer;
-import Users.Courier;
 import Users.Manager;
-import Users.LoginDetails;
 
 public class LogInUI extends JPanel implements ActionListener {
 

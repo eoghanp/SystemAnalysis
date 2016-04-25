@@ -2,16 +2,11 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Users.PersonCustomer;
 import Users.Manager;
 
 public class MainManagerScreen extends JPanel implements ActionListener{
@@ -64,7 +59,7 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		}
 		else if("Assign Couriers".equals(e.getActionCommand())) 
 		{
-			JFrame frame = new JFrame("Purchase Service");
+			JFrame frame = new JFrame("Assign Courier");
 			frame.setSize(600, 600);
 			frame.getContentPane().add(new AssignCourierUI(manager));
 			frame.setVisible(true);

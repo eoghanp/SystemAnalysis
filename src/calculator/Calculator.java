@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Users.Courier;
 import Vehicle.LocationUpdater;
 import Vehicle.Subject;
 import Vehicle.Vehicle;
 import Vehicle.VehicleFactory;
-import Works.Job;
 import Works.Order;
 import dataIO.DBHandler;
 import parcel.Parcel;
@@ -76,15 +74,17 @@ public class Calculator {
 		Thread r2 = (Thread) routingAlgoritm2;
 		r1.start();
 		r2.start();
+		
+		DBHandler db = DBHandler.getSingletonInstance();
 		List<Route> routes = new ArrayList<Route>();
 		String descriptions[] = {"North", "South", "East", "West", "Central"};
-		String models[] = {"Ford S-Max", "Toyoto Hiace", "Volkswagon Caddy"};
 		String vehicles[] = {"smallvan", "largevan", "smalllorry", "largelorry"};
+		
 		int a = 0, numRoutes = listOfOrders.size()/5;
 		if (listOfOrders.size()%5 != 0)
 			numRoutes++;
 		for (int i = 0; i < numRoutes; i++){
-			DBHandler db = DBHandler.getSingletonInstance();
+			
 			int max = 0;
 			try {
 				List<Route> c = db.getRoutes();
@@ -96,13 +96,13 @@ public class Calculator {
 				e.printStackTrace();
 			}
 			routes.add(new Route(max+1, null));
+			
 			for (int j = 0; j < 5 && a < listOfOrders.size(); j++){
 				routes.get(i).addJob(listOfOrders.get(a));
 				a++;
 			}
 		}
 		
-		DBHandler db = DBHandler.getSingletonInstance();
 		VehicleFactory vf = new VehicleFactory();
 		for (int i = 0; i < routes.size(); i++){
 			routes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);

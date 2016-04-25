@@ -6,8 +6,6 @@ import java.util.List;
 //import UI.Route;
 import Vehicle.Vehicle;
 import Works.Job;
-import Works.Order;
-import parcel.Parcel;
 
 interface Observer{
 	public void update(String location);

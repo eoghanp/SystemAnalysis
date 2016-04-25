@@ -1,5 +1,4 @@
 package Users;
-import javax.swing.*;
 
 public class Person implements Recipient{
 	protected String FirstName;
@@ -8,15 +7,6 @@ public class Person implements Recipient{
 	protected String password;
 	protected String address; 
 	protected String telephone;
-	
-	//Git Test----------------
-	
-	/*public void logIn(email, password){
-		//Enter email and password into dialog box
-	}
-	public void logOut(){
-		//Click log out button
-	}*/
 	
 	public Person(String first, String last, String mail, String pass, String add, String phone){
 		FirstName = first;

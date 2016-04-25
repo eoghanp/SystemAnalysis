@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +18,6 @@ import Users.Courier;
 import Users.Customer;
 import Users.LoginDetails;
 import Users.PersonCustomer;
-import Users.Manager;
 import Users.Person;
 import Users.Recipient;
 import Vehicle.SmallVan;
@@ -59,6 +56,7 @@ public class DBHandler {
 
 				loginDetailsList.add(addLoginDetails);
 			}
+			aFileScanner.close();
 			
 			while (l < loginDetailsList.size()) {
 				if (email.equalsIgnoreCase(loginDetailsList.get(l).getUserName()) && 
@@ -67,6 +65,7 @@ public class DBHandler {
 				}
 				++l;
 			}
+			
 		} catch (FileNotFoundException fileNotFound) {
 			fileNotFound.printStackTrace();
 		}
@@ -100,6 +99,7 @@ public class DBHandler {
 
 				loginDetailsList.add(addLoginDetails);
 			}
+			aFileScanner.close();
 		} catch (FileNotFoundException fileNotFound) {
 			fileNotFound.printStackTrace();
 		}
@@ -173,7 +173,9 @@ public class DBHandler {
 				Telephone=Integer.parseInt(tokens[6]);
 				
 				BusinessCustomer businesses = new BusinessCustomer(Name, Address, Email, BusinessCard, Telephone, CardNumber);
-				business.add(businesses);			
+				business.add(businesses);	
+				
+				br.close();
 			}			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -367,7 +369,8 @@ public class DBHandler {
 				
 				Courier corior = new Courier(first, last, email, password, address, telephone, id);
 				couriers.add(corior);			
-			}			
+			}	
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -504,7 +507,8 @@ public class DBHandler {
 				
 				Route route = new Route(id, details, distance, myJobs);	
 				allRoutes.add(route);
-			}			
+			}		
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -561,7 +565,8 @@ public class DBHandler {
 						}
 					}
 				}
-			}			
+			}	
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -598,7 +603,8 @@ public class DBHandler {
 				
 				PersonCustomer customer = new PersonCustomer(first, last, email, "", address, telephone, id, card);
 				customers.add(customer);			
-			}			
+			}
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -714,6 +720,7 @@ public class DBHandler {
 				Parcel parcel = new Parcel(description, id, dim, weight, requirements, urgent);
 				parcels.add(parcel);			
 			}			
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -757,7 +764,8 @@ public class DBHandler {
 				
 				Vehicle vehicle = new SmallVan(model, weight, dim, feature, classification);
 				vehicles.add(vehicle);			
-			}			
+			}	
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

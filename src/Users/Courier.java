@@ -9,8 +9,6 @@ import route.Route;
 
 public class Courier extends Person {
 	private int courierID;
-	//public Vehicle courierVehicle;
-	//public Order [] OrderList;
 	private Route route;
 	
 	public Courier(String first, String last, String mail, String pass, String add, String phone)
@@ -57,27 +55,11 @@ public class Courier extends Person {
 				"\n\nCourier ID:   " + courierID;
 		return details;
 	}
-	
-	/*public Order [] getOrderList(){
-		return orderList;
-	}
-	
-	public Vehicle getVehicle(){
-		return courierVehicle;
-	}*/
-	
-	public void assignJob(){
-		
-	}
-	
 
 	public String getName(){
 		return super.getName();
 	}
 	
-	/*public void removeJob(Order jobName){
-		
-	}*/
 
 	public void getSchedule(){
 		DBHandler db = DBHandler.getSingletonInstance();

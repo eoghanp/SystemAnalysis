@@ -5,13 +5,6 @@ import Works.Order.Status;
 
 public interface Job
 {
-
-	//public abstract int sendBackJob();
-
-	//public abstract int sendForwardJob();
-
-	//public abstract String getJobStatus();
-	
 	public Recipient getRecipient();
 	
 	public int getPriority();

@@ -63,12 +63,6 @@ public class PersonCustomer extends Person implements Customer
 	}
 
 	@Override
-	public void enquireAboutService()
-	{
-		
-	}
-
-	@Override
 	public void purchaseService(List<Parcel> parcels, double cost, int priority, Manager man, Person person, String addr)
 	{
 		Order order = new Order(parcels, person, cost, priority, addr);

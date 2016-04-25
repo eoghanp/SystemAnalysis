@@ -5,16 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import Users.Courier;
-import Vehicle.SmallVan;
 import Works.Job;
 import route.Route;
 
@@ -22,7 +19,6 @@ public class MainCourierScreen extends JPanel implements ActionListener{
 
 	protected List<Job> jobs;
 	private JTable table;
-	private enum status {withCustomer, withCourier, delivered};
 	
 	public MainCourierScreen(Courier courier) {
 		// TODO Auto-generated constructor stub

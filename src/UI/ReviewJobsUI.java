@@ -16,10 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 import Report.Report;
 import Users.Manager;
-import Works.Job;
 import Works.Order;
 import dataIO.DBHandler;
-import route.Route;
 
 public class ReviewJobsUI extends JPanel implements ActionListener{
 

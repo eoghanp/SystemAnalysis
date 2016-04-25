@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Report.Report;
-import Users.Courier;
 import Users.Recipient;
 import dataIO.DBHandler;
 import parcel.Parcel;
@@ -14,12 +13,10 @@ public class Order implements Job{
 	
 	int OrderID;
 	List<Parcel> parcels = new ArrayList<Parcel>();
-	//Courier courierDetails;
 	Recipient recipientDetails;
 	int priority;
 	double price;
 	boolean paid;
-	//int status;
 	Report report;
 	String collectionAddress;
 	public enum Status {withCustomer, withCourier, delivered, notDelivered};
@@ -108,10 +105,6 @@ public class Order implements Job{
 	public List<Parcel> getParcels(){
 		return parcels;
 	}
-	
-	/*public Courier getCourier(){
-		return this.Courier;
-	}*/
 	
 	public Recipient getRecipient(){
 		return this.recipientDetails;

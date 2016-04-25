@@ -1,7 +1,5 @@
 package Vehicle;
 
-import route.Route;
-
 public interface Vehicle {
 
 	public String getLocation();

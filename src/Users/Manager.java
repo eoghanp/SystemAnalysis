@@ -7,14 +7,12 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import Report.SuccessHeader;
 import Report.ReportComponent;
 import Report.DateFooter;
 import Report.FailHeader;
 import Report.NameFooter;
-import Works.Job;
 import Works.Order;
 import dataIO.DBHandler;
 
@@ -36,14 +34,6 @@ public class Manager extends Person{
 		}
 	}
 	
-	public void reviewOrder(){
-		
-	}
-	
-	public void priortizeOrder(){
-		
-	}
-	
 	public List<Courier> getListOfCouriers(){
 		return listOfCouriers;
 	}
@@ -54,11 +44,8 @@ public class Manager extends Person{
 		FileWriter aFileWriter = null;
 		try {
 			aFileWriter = new FileWriter("login.txt", true);
-			//aFileWriter = new FileWriter("login2.txt");
 			
 			PrintWriter out = new PrintWriter(aFileWriter);
-
-			Scanner in = new Scanner(System.in);
 			
 			System.out.println("3" + "," + c.getEmail() + 
 					 "," + c.getPassword());

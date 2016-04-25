@@ -1,9 +1,5 @@
 package calculator;
 
-import java.util.List;
-
-import route.Route;
-
 public class RoutingAlgorithm2 extends Thread implements RoutingInterface{
 
 	public RoutingAlgorithm2() {
