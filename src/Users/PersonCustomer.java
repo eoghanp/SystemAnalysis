@@ -1,5 +1,6 @@
 package Users;
 
+import java.io.IOException;
 import java.util.List;
 
 import Works.Order;
@@ -16,6 +17,23 @@ public class PersonCustomer extends Person implements Customer
 		super(first, last, mail, pass, add, phone);
 		this.customerID = customerID;
 		this.creditCardNumber = creditCardNumber;
+	}
+
+	public PersonCustomer(String userName, String passText) {
+		super(null, null, userName, passText, null, null);
+		DBHandler db = DBHandler.getSingletonInstance();
+		int max = 0;
+		try {
+			List<PersonCustomer> c = db.getCustomer();
+			for(int i = 0; i < c.size(); i++)
+				if(c.get(i).getCustomerID() > max)
+					max = c.get(i).getCustomerID();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.customerID = max+1;
+		this.creditCardNumber = 123884962;
 	}
 
 	public void provideFeeback()

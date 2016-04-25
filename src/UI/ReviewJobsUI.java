@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,6 +31,10 @@ public class ReviewJobsUI extends JPanel implements ActionListener{
 		// TODO Auto-generated constructor stub
 		setLayout(null);
 		man = manager;
+		
+		JLabel mainlbl = new JLabel("Jobs:");
+		mainlbl.setBounds(250, 10, 150, 25);
+		add(mainlbl);
 		
 		DBHandler db = DBHandler.getSingletonInstance();
 		try {

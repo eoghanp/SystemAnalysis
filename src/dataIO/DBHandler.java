@@ -17,6 +17,7 @@ import java.util.Scanner;
 import route.Route;
 import Business.BusinessCustomer;
 import Users.Courier;
+import Users.Customer;
 import Users.LoginDetails;
 import Users.PersonCustomer;
 import Users.Manager;
@@ -412,14 +413,31 @@ public class DBHandler {
     		//true = append file
     		FileWriter fileWritter = new FileWriter(file.getName(),true);
     	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-    	        bufferWritter.write(data);
+    	        PrintWriter pw = new PrintWriter(bufferWritter);
+    	        pw.println(data);
     	        bufferWritter.close();
+    	        pw.close();
     	    
 	        System.out.println(data+" saved");
 	        
     	}catch(IOException e){
     		e.printStackTrace();
     	}
+	}
+	
+	public Customer getThisCustomer(String uName, String pass){
+		try {
+			List<PersonCustomer> c = getCustomer();
+			for(int i = 0; i < c.size(); i++){
+				if(c.get(i).getEmail().equals(uName) && c.get(i).getPassword().equals(pass)){
+					return (Customer)c.get(i);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void saveRoute(Route route)

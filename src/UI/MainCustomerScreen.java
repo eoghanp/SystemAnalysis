@@ -7,26 +7,32 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Users.PersonCustomer;
+import Users.Customer;
 import Users.Manager;
 
 public class MainCustomerScreen  extends JPanel implements ActionListener{
 
-	public MainCustomerScreen() {
+	public MainCustomerScreen(Customer customer) {
 		// TODO Auto-generated constructor stub
 		setLayout(null);
 		
+		JLabel mainlbl = new JLabel("Menu:");
+		mainlbl.setBounds(250, 50, 150, 25);
+		add(mainlbl);
+		
 		JButton editACButton = new JButton("Edit Account");
-		editACButton.setBounds(20, 230, 150, 25);
+		editACButton.setBounds(200, 100, 150, 25);
 		add(editACButton);
 		editACButton.addActionListener(this);
 		editACButton.setActionCommand("Edit AC");
 		
 		JButton purchaseButton = new JButton("Purchase Service");
-		purchaseButton.setBounds(330, 230, 150, 25);
+		purchaseButton.setBounds(200, 200, 150, 25);
 		add(purchaseButton);
 		purchaseButton.addActionListener(this);
 		purchaseButton.setActionCommand("purchase");

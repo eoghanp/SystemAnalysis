@@ -23,7 +23,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Users.PersonCustomer;
+import dataIO.DBHandler;
 import Users.Courier;
+import Users.Customer;
 import Users.Manager;
 import Users.LoginDetails;
 
@@ -60,12 +62,12 @@ public class RegisterUI extends JPanel implements ActionListener {
 		add(passwordPwd);
 		
 		typeLbl = new JLabel("Type");
-		typeLbl.setBounds(75, 105, 180, 25);
+		typeLbl.setBounds(75, 140, 180, 25);
 		add(typeLbl);
 		
 		String[] arrLoginType = {"Manager", "Business", "Customer"};
 		cmbLoginTypeList = new JComboBox(arrLoginType);
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		cmbLoginTypeList.setBounds(180, 140, 200, 25);
 		cmbLoginTypeList.setSelectedIndex(2);
 		cmbLoginTypeList.addActionListener(new ActionListener()
 	    {
@@ -75,7 +77,6 @@ public class RegisterUI extends JPanel implements ActionListener {
 				if (ae.getSource() == cmbLoginTypeList) {
 						JComboBox cb = (JComboBox)ae.getSource();
 						type = (String)cb.getSelectedItem();
-						//System.out.println(cb);
 						System.out.println("Type is: " + type);
 						switch (type) {
 						case "Manager" : loginType = 0; System.out.println(loginType); //Manager 
@@ -93,7 +94,7 @@ public class RegisterUI extends JPanel implements ActionListener {
 		add(cmbLoginTypeList);
 		
 		registerBtn = new JButton("Create Account");
-		registerBtn.setBounds(243, 135, 140, 25);
+		registerBtn.setBounds(243, 200, 140, 25);
 		add(registerBtn);
 		registerBtn.addActionListener(this);
 		registerBtn.setActionCommand("createAccount");
@@ -106,6 +107,9 @@ public class RegisterUI extends JPanel implements ActionListener {
 			String passText = new String(passwordPwd.getPassword());
 			System.out.println(passText);
 				
+			Customer c = new PersonCustomer(userName, passText);
+			DBHandler db = DBHandler.getSingletonInstance();
+			db.saveCustomer((PersonCustomer) c);
 			ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
 			FileWriter aFileWriter = null;
 			try {
@@ -130,6 +134,5 @@ public class RegisterUI extends JPanel implements ActionListener {
 					
 			}
 		}
-	      //System.exit(0);
 	}
 }

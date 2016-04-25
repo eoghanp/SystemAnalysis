@@ -1,0 +1,2 @@
+1|null null|customer1|null|null|123884962
+2|null null|customer2|null|null|123884962

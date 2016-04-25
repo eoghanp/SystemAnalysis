@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -22,26 +23,30 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		setLayout(null);
 		manager = man;
 		
+		JLabel mainlbl = new JLabel("Menu:");
+		mainlbl.setBounds(250, 50, 150, 25);
+		add(mainlbl);
+		
 		JButton addButton = new JButton("Add Courier");
-		addButton.setBounds(20, 230, 150, 25);
+		addButton.setBounds(200, 100, 150, 25);
 		add(addButton);
 		addButton.addActionListener(this);
 		addButton.setActionCommand("Add Courier");
 		
 		JButton purchaseButton = new JButton("Assign Couriers");
-		purchaseButton.setBounds(330, 230, 150, 25);
+		purchaseButton.setBounds(200, 150, 150, 25);
 		add(purchaseButton);
 		purchaseButton.addActionListener(this);
 		purchaseButton.setActionCommand("Assign Couriers");
 		
 		JButton reviewButton = new JButton("Review Deliveries");
-		reviewButton.setBounds(20, 350, 150, 25);
+		reviewButton.setBounds(200, 200, 150, 25);
 		add(reviewButton);
 		reviewButton.addActionListener(this);
 		reviewButton.setActionCommand("Review Deliveries");
 		
 		JButton DBButton = new JButton("View Database");
-		DBButton.setBounds(330, 350, 150, 25);
+		DBButton.setBounds(200, 250, 150, 25);
 		add(DBButton);
 		DBButton.addActionListener(this);
 		DBButton.setActionCommand("View Database");
