@@ -21,7 +21,7 @@ import dataIO.DBHandler;
 
 public class ReviewJobsUI extends JPanel implements ActionListener{
 
-	protected List<Order> jobs;
+	private List<Order> jobs;
 	private JTable table;
 	private Manager man;
 	

@@ -23,27 +23,27 @@ import parcel.Parcel;
 
 public class CustomerUI extends JPanel implements ActionListener {
 
-  protected JTextField collectiontxt;
-  protected JTextField receipientNametxt;
-  protected JTextField receipientAddrtxt;
-  protected JTextField receipientPhonetxt;
-  protected JTextField descriptiontxt;
-  protected JTextField heighttxt;
-  protected JTextField widthtxt;
-  protected JTextField lengthtxt;
-  protected JTextField weighttxt;
-  protected JTextField creditCardtxt;
-  protected JTextArea parcels;
-  protected JTextArea costtxt;
-  protected JComboBox<String> specialReqs;
-  protected JComboBox<String> deliveryOptions;
-  protected String requirements[] = {"none", "fridge", "freezer", "tanker", "livestock"};
-  protected String options[] = {"standard", "fast"};
-  protected List<Parcel> l = new ArrayList<Parcel>();
+  private JTextField collectiontxt;
+  private JTextField receipientNametxt;
+  private JTextField receipientAddrtxt;
+  private JTextField receipientPhonetxt;
+  private JTextField descriptiontxt;
+  private JTextField heighttxt;
+  private JTextField widthtxt;
+  private JTextField lengthtxt;
+  private JTextField weighttxt;
+  private JTextField creditCardtxt;
+  private JTextArea parcels;
+  private JTextArea costtxt;
+  private JComboBox<String> specialReqs;
+  private JComboBox<String> deliveryOptions;
+  private String requirements[] = {"none", "fridge", "freezer", "tanker", "livestock"};
+  private String options[] = {"standard", "fast"};
+  private List<Parcel> l = new ArrayList<Parcel>();
   
-  protected Customer cust;
-  protected Manager man;
-  protected Calculator c = new Calculator();
+  private Customer cust;
+  private Manager man;
+  private Calculator c = new Calculator();
   
   public CustomerUI(PersonCustomer customer, Manager manager) {
 	  man = manager;

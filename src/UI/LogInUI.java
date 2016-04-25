@@ -31,12 +31,12 @@ public class LogInUI extends JPanel implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected JLabel userNameLbl;
-	protected JLabel passwordLbl;
-	protected JTextField userNameTxt;
-	protected JPasswordField passwordPwd;
-	protected JButton logInBtn;
-	protected JButton registerBtn;
+	private JLabel userNameLbl;
+	private JLabel passwordLbl;
+	private JTextField userNameTxt;
+	private JPasswordField passwordPwd;
+	private JButton logInBtn;
+	private JButton registerBtn;
 
 	public LogInUI() {
 		setLayout(null);

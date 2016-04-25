@@ -17,9 +17,8 @@ import Works.Order;
 import dataIO.DBHandler;
 
 public class Manager extends Person{
-	//public Order [] listOfOrders;
-	protected List<Courier> listOfCouriers = new ArrayList<Courier>();
-	public List<Order> listOfOrders = new ArrayList<Order>();
+	private List<Courier> listOfCouriers = new ArrayList<Courier>();
+	private List<Order> listOfOrders = new ArrayList<Order>();
 	
 	public Manager(String first, String last, String mail, String pass, String add, String phone)
 	{

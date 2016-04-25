@@ -12,15 +12,15 @@ import Users.Courier;
 
 public class ManagerUI extends JPanel implements ActionListener
 {
-	  protected JTextField courierFirstNametxt;
-	  protected JTextField courierLastNametxt;
-	  protected JTextField emailtxt;
-	  protected JTextField passwordtxt;
-	  protected JTextField addresstxt;
-	  protected JTextField contacttxt;
+	private JTextField courierFirstNametxt;
+	private JTextField courierLastNametxt;
+	private JTextField emailtxt;
+	private JTextField passwordtxt;
+	private JTextField addresstxt;
+	private JTextField contacttxt;
 
-	  protected Manager man;
-	  protected Courier employee;
+	private Manager man;
+	private Courier employee;
 	  
 	  public ManagerUI(Manager manager) 
 	  {

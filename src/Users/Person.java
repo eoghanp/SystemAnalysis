@@ -39,10 +39,12 @@ public class Person implements Recipient{
 		return password;
 	}
 	
+	@Override
 	public void setFirstName(String fname){
 		FirstName = fname;
 	}
 	
+	@Override
 	public void setLastName(String lname){
 		LastName = lname;
 	}
@@ -55,10 +57,12 @@ public class Person implements Recipient{
 		password = newPassword;
 	}
 	
+	@Override
 	public void setTelephone(String newTelephone){
 		telephone = newTelephone;
 	}
 	
+	@Override
 	public void setAddress(String newAddress){
 		address = newAddress;
 	}

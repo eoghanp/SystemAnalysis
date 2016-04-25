@@ -17,7 +17,7 @@ import route.Route;
 
 public class MainCourierScreen extends JPanel implements ActionListener{
 
-	protected List<Job> jobs;
+	private List<Job> jobs;
 	private JTable table;
 	
 	public MainCourierScreen(Courier courier) {

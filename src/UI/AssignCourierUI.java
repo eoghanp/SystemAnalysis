@@ -21,14 +21,14 @@ import route.Route;
 
 public class AssignCourierUI extends JPanel implements ActionListener {
 	
-	protected JComboBox<String> availableCouriers;
-	protected JTable table;
-	protected JScrollPane pane;
-	protected Manager man;
-	protected List<Route> routes;
-	protected List<Courier> courierList;
-	protected JTextArea assigned;
-	protected String assignedTxt;
+	private JComboBox<String> availableCouriers;
+	private JTable table;
+	private JScrollPane pane;
+	private Manager man;
+	private List<Route> routes;
+	private List<Courier> courierList;
+	private JTextArea assigned;
+	private String assignedTxt;
 	
 	public AssignCourierUI(Manager manager) {
 		setLayout(null);

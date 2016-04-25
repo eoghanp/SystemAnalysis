@@ -12,7 +12,6 @@ public class LargeLorry implements Vehicle, Subject {
 	private String specialFeatures;
 	private String classification;
 	private String location;
-	//private Route route; //the route assigned to the vehicle
 	public ArrayList<Route> observers = new ArrayList<Route>();
 	
 	public LargeLorry(String model, double maxWeight, double[] storageDimensions, String specialFeatures,

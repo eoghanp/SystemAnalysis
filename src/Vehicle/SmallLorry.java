@@ -12,7 +12,6 @@ public class SmallLorry implements Vehicle, Subject {
 	private String specialFeatures;
 	private String classification;
 	private String location;
-	//private Route route; //the route assigned to the vehicle
 	public ArrayList<Route> observers = new ArrayList<Route>();
 	
 	public SmallLorry(String model, double maxWeight, double[] storageDimensions, String specialFeatures,

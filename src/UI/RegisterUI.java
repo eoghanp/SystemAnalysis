@@ -22,14 +22,14 @@ import Users.LoginDetails;
 
 public class RegisterUI extends JPanel implements ActionListener {
 
-	protected JComboBox cmbLoginTypeList;
-	protected JLabel userNameLbl;
-	protected JLabel passwordLbl;
-	protected JLabel typeLbl;
-	protected JTextField userNameTxt;
-	protected JPasswordField passwordPwd;
-	protected JButton registerBtn;
-	protected int loginType = 0;
+	private JComboBox cmbLoginTypeList;
+	private JLabel userNameLbl;
+	private JLabel passwordLbl;
+	private JLabel typeLbl;
+	private JTextField userNameTxt;
+	private JPasswordField passwordPwd;
+	private JButton registerBtn;
+	private int loginType = 0;
 	
 	
 	

@@ -11,16 +11,16 @@ import parcel.Parcel;
 
 public class Order implements Job{
 	
-	int OrderID;
-	List<Parcel> parcels = new ArrayList<Parcel>();
-	Recipient recipientDetails;
-	int priority;
-	double price;
-	boolean paid;
-	Report report;
-	String collectionAddress;
+	private int OrderID;
+	private List<Parcel> parcels = new ArrayList<Parcel>();
+	private Recipient recipientDetails;
+	private int priority;
+	private double price;
+	private boolean paid;
+	private Report report;
+	private String collectionAddress;
 	public enum Status {withCustomer, withCourier, delivered, notDelivered};
-	Status status;
+	private Status status;
 	
 	
 	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority, String addr){

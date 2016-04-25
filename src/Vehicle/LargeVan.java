@@ -12,7 +12,6 @@ public class LargeVan implements Vehicle, Subject {
 	private String specialFeatures;
 	private String classification;
 	private String location;
-	//private Route route; //the route assigned to the vehicle
 	public ArrayList<Route> observers = new ArrayList<Route>();
 	
 	public LargeVan(String model, double maxWeight, double[] storageDimensions, String specialFeatures,
