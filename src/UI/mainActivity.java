@@ -50,7 +50,7 @@ public class mainActivity {
 	private static void testLogin() {
 		// TODO Auto-generated method stub
 		JFrame frame = new JFrame("Login");
-		frame.setSize(600, 600);
+		frame.setSize(500, 300);
 		frame.addWindowListener(new WindowAdapter() {
 	      public void windowClosing(WindowEvent e) {
 	        System.exit(0);
@@ -70,7 +70,7 @@ public class mainActivity {
 	        System.exit(0);
 	      }
 	    });
-		frame.getContentPane().add(new MainManagerScreen());
+		frame.getContentPane().add(new MainManagerScreen(manager));
 		frame.setVisible(true);
 		
 	}

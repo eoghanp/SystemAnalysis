@@ -1,10 +1,13 @@
 package Users;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Report.SuccessHeader;
 import Report.ReportComponent;
@@ -13,6 +16,7 @@ import Report.FailHeader;
 import Report.NameFooter;
 import Works.Job;
 import Works.Order;
+import dataIO.DBHandler;
 
 public class Manager extends Person{
 	//public Order [] listOfOrders;
@@ -22,6 +26,14 @@ public class Manager extends Person{
 	public Manager(String first, String last, String mail, String pass, String add, String phone)
 	{
 		super(first, last, mail, pass, add, phone);
+		DBHandler db = new DBHandler();
+		try {
+			listOfCouriers = db.getCourier();
+			listOfOrders = db.getOrder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void reviewOrder(){
@@ -38,6 +50,29 @@ public class Manager extends Person{
 	
 	public void addCourier(Courier c){
 		listOfCouriers.add(c);
+		
+		FileWriter aFileWriter = null;
+		try {
+			aFileWriter = new FileWriter("login.txt", true);
+			//aFileWriter = new FileWriter("login2.txt");
+			
+			PrintWriter out = new PrintWriter(aFileWriter);
+
+			Scanner in = new Scanner(System.in);
+			
+			System.out.println("3" + "," + c.getEmail() + 
+					 "," + c.getPassword());
+				
+			out.println("3" + "," + c.getEmail() + 
+					 "," + c.getPassword());
+
+			aFileWriter.close();
+			out.close();
+		} catch (IOException e) {
+				
+		}
+		DBHandler db = new DBHandler();
+		db.saveCourier(c);
 	}
 	
 	public List<Order> getListOfOrders(){
@@ -50,15 +85,15 @@ public class Manager extends Person{
 	
 	public void printReport(Order o) throws FileNotFoundException, UnsupportedEncodingException{
 		PrintWriter writer = new PrintWriter("printable_Delivery_Report.txt", "UTF-8");
-		//writer.println("The first line");
-		//writer.println("The second line");
 		writer.close();
 		ReportComponent myReport;
 		myReport = o.getReport();
 		myReport = new DateFooter(myReport);
 		myReport = new NameFooter(myReport);
-		myReport = new FailHeader(myReport);
-		myReport = new SuccessHeader(myReport);
+		if (o.getReport().getDeliverStatus() == "Not Delivered")
+			myReport = new FailHeader(myReport);
+		else if (o.getReport().getDeliverStatus() == "Delivery completed and verified by manager")
+			myReport = new SuccessHeader(myReport);
 		myReport.prtReport();
 	}
 

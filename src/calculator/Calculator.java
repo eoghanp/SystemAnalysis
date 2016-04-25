@@ -1,11 +1,17 @@
 package calculator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Users.Courier;
+import Vehicle.LocationUpdater;
+import Vehicle.Subject;
+import Vehicle.Vehicle;
 import Vehicle.VehicleFactory;
 import Works.Job;
 import Works.Order;
+import dataIO.DBHandler;
 import parcel.Parcel;
 import route.Route;
 
@@ -72,18 +78,36 @@ public class Calculator {
 		if (listOfOrders.size()%5 != 0)
 			numRoutes++;
 		for (int i = 0; i < numRoutes; i++){
-			routes.add(new Route(i, null));
+			DBHandler db = new DBHandler();
+			int max = 0;
+			try {
+				List<Route> c = db.getRoutes();
+				for(int x = 0; x < c.size(); x++)
+					if(c.get(x).getRouteId() > max)
+						max = c.get(x).getRouteId();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			routes.add(new Route(max+1, null));
 			for (int j = 0; j < 5 && a < listOfOrders.size(); j++){
 				routes.get(i).addJob(listOfOrders.get(a));
 				a++;
 			}
 		}
 		
+		DBHandler db = new DBHandler();
 		VehicleFactory vf = new VehicleFactory();
 		for (int i = 0; i < routes.size(); i++){
 			routes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);
 			routes.get(i).setDistance((((int)(Math.random()*400) + 50)));//use order details in future
-			routes.get(i).assignVehicle(vf.getVehicle(vehicles[((int)(Math.random() * 3))]));//more complex in future - use parcel requirements
+			Vehicle vehicle = vf.getVehicle(vehicles[((int)(Math.random() * 3))]);
+			routes.get(i).assignVehicle(vehicle);//more complex in future - use parcel requirements
+			db.saveRoute(routes.get(i));
+			Subject subject = (Subject) vehicle;
+			subject.registerObserver(routes.get(i));
+			LocationUpdater lu = new LocationUpdater(vehicle);
+			lu.start();
 		}
 		
 		return routes;

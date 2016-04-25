@@ -23,7 +23,6 @@ public class LargeLorry implements Vehicle, Subject {
 		this.specialFeatures = specialFeatures;
 		this.classification = classification;
 		System.out.println("Vehicle created");
-		System.out.println("LL");
 	}
 
 	@Override

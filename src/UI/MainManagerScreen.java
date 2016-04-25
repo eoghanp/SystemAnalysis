@@ -15,9 +15,12 @@ import Users.Manager;
 
 public class MainManagerScreen extends JPanel implements ActionListener{
 
-	public MainManagerScreen() {
+	private Manager manager;
+	
+	public MainManagerScreen(Manager man) {
 		// TODO Auto-generated constructor stub
 		setLayout(null);
+		manager = man;
 		
 		JButton addButton = new JButton("Add Courier");
 		addButton.setBounds(20, 230, 150, 25);
@@ -50,17 +53,22 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		if ("Add Courier".equals(e.getActionCommand())) 
 		{
 			JFrame frame = new JFrame("Add Courier");
-			frame.setSize(900, 550);
-			Manager manager = new Manager(null, null, null, null, null, null);
+			frame.setSize(500, 300);
 			frame.getContentPane().add(new ManagerUI(manager));
 			frame.setVisible(true);
 		}
 		else if("Assign Couriers".equals(e.getActionCommand())) 
 		{
 			JFrame frame = new JFrame("Purchase Service");
-			frame.setSize(900, 550);
-			Manager manager = new Manager(null, null, null, null, null, null);
+			frame.setSize(600, 600);
 			frame.getContentPane().add(new AssignCourierUI(manager));
+			frame.setVisible(true);
+		}
+		else if("Review Deliveries".equals(e.getActionCommand())) 
+		{
+			JFrame frame = new JFrame("Review Deliveries");
+			frame.setSize(600, 450);
+			frame.getContentPane().add(new ReviewJobsUI(manager));
 			frame.setVisible(true);
 		}
 		

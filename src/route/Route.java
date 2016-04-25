@@ -27,6 +27,14 @@ public class Route implements Observer{
 		this.routeDetails = routeDetails;
 		System.out.println("Route created");
 	}
+	
+	public Route(int routeId, String routeDetails, int distance, List<Job> jobs) {
+		this.routeId = routeId;
+		this.routeDetails = routeDetails;
+		this.distance = distance;
+		this.jobs = jobs;
+		System.out.println("Route created");
+	}
 
 	public int getRouteId() {
 		return routeId;

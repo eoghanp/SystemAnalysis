@@ -1,5 +1,10 @@
 package Users;
 
+
+import java.io.IOException;
+import java.util.List;
+
+import dataIO.DBHandler;
 import route.Route;
 
 public class Courier extends Person {
@@ -8,10 +13,29 @@ public class Courier extends Person {
 	//public Order [] OrderList;
 	private Route route;
 	
-	public Courier(String first, String last, String mail, String pass, String add, String phone, int courierID)
+	public Courier(String first, String last, String mail, String pass, String add, String phone)
 	{
 		super(first, last, mail, pass, add, phone);
-		this.courierID = courierID;
+		DBHandler db = new DBHandler();
+		int max = 0;
+		try {
+			List<Courier> c = db.getCourier();
+			for(int i = 0; i < c.size(); i++)
+				if(c.get(i).getCourierID() > max)
+					max = c.get(i).getCourierID();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.courierID = max+1;
+		this.route = null;
+	}
+	
+	public Courier(String first, String last, String mail, String pass, String add, String phone, int id)
+	{
+		super(first, last, mail, pass, add, phone);
+		this.courierID = id;
+		this.route = null;
 	}
 
 
@@ -55,8 +79,9 @@ public class Courier extends Person {
 		
 	}*/
 
-	public void organizeSchedule(){
-		
+	public void getSchedule(){
+		DBHandler db = new DBHandler();
+		this.route = db.getSpecificRoute(this.courierID);
 	}
 	
 	public void setRoute(Route r){

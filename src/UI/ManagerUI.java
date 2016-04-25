@@ -28,7 +28,6 @@ public class ManagerUI extends JPanel implements ActionListener
 {
 	  protected JTextField courierFirstNametxt;
 	  protected JTextField courierLastNametxt;
-	  protected JTextField courierIDtxt;
 	  protected JTextField emailtxt;
 	  protected JTextField passwordtxt;
 	  protected JTextField addresstxt;
@@ -56,13 +55,6 @@ public class ManagerUI extends JPanel implements ActionListener
 		courierLastNametxt = new JTextField(20);
 		courierLastNametxt.setBounds(120, 40, 200, 25);
 		add(courierLastNametxt);
-		//ID
-		JLabel IDlbl = new JLabel("Employee ID");
-		IDlbl.setBounds(20, 70, 180, 25);
-		add(IDlbl);
-		courierIDtxt = new JTextField(20);
-		courierIDtxt.setBounds(120, 70, 200, 25);
-		add(courierIDtxt);
 		//Email
 		JLabel emaillbl = new JLabel("Employee Email");
 		emaillbl.setBounds(20, 100, 180, 25);
@@ -103,44 +95,25 @@ public class ManagerUI extends JPanel implements ActionListener
 	 
 	  public void actionPerformed(ActionEvent evt) 
 	  {
-		  boolean isInteger = Pattern.matches("\\d{1,5}", courierIDtxt.getText());
+		  //boolean isInteger = Pattern.matches("\\d{1,5}", courierIDtxt.getText());
 		  if ("Add Courier".equals(evt.getActionCommand())) 
 		  {
-			if ((courierFirstNametxt.getText().equals("")) || (courierLastNametxt.getText().equals("")) || (courierIDtxt.getText().equals("")) || (emailtxt.getText().equals("")) || (passwordtxt.getText().equals("")) || (addresstxt.getText().equals("")) || (contacttxt.getText().equals("")))
+			if ((courierFirstNametxt.getText().equals("")) || (courierLastNametxt.getText().equals("")) || (emailtxt.getText().equals("")) || (passwordtxt.getText().equals("")) || (addresstxt.getText().equals("")) || (contacttxt.getText().equals("")))
 			  {
 				  JOptionPane.showMessageDialog(null, "You must enter details in all text fields", "Enter all data", 2);
 			  }
-			  else if(isInteger == false)
+			  /*else if(isInteger == false)
 			  {
 				  JOptionPane.showMessageDialog(null, "Employee ID must be an integer", "Employee ID", 2);
 			  }
-			  else{
-				  Courier employee = new Courier(courierFirstNametxt.getText(),courierLastNametxt.getText(),emailtxt.getText(),passwordtxt.getText(),addresstxt.getText(),contacttxt.getText(),Integer.parseInt(courierIDtxt.getText()));
+			  else{*/
+				  Courier employee = new Courier(courierFirstNametxt.getText(),courierLastNametxt.getText(),emailtxt.getText(),passwordtxt.getText(),addresstxt.getText(),contacttxt.getText());
 				  man.addCourier(employee);
 				  
-					FileWriter aFileWriter = null;
-					try {
-						aFileWriter = new FileWriter("login.txt", true);
-						//aFileWriter = new FileWriter("login2.txt");
-						
-						PrintWriter out = new PrintWriter(aFileWriter);
-
-						Scanner in = new Scanner(System.in);
-						
-						System.out.println("3" + "," + emailtxt.getText() + 
-								 "," + passwordtxt.getText());
-							
-						out.println("3" + "," + emailtxt.getText() + 
-								 "," + passwordtxt.getText());
-
-						aFileWriter.close();
-						out.close();
-					} catch (IOException e) {
-							
-					}
+					
 				  JOptionPane.showMessageDialog(null, employee.showCourierDetails(), "Courier created", 1);
 				  clearCourierForm();
-			  }			  
+			  		  
 			
 		  }
 	  }
@@ -148,7 +121,6 @@ public class ManagerUI extends JPanel implements ActionListener
 	  private void clearCourierForm(){
 		  courierFirstNametxt.setText("");
 		  courierLastNametxt.setText("");
-		  courierIDtxt.setText("");
 		  emailtxt.setText("");
 		  passwordtxt.setText("");
 		  addresstxt.setText("");

@@ -1,6 +1,7 @@
 package Works;
 
 import Users.Recipient;
+import Works.Order.Status;
 
 public interface Job
 {
@@ -15,10 +16,12 @@ public interface Job
 	
 	public int getPriority();
 	
-	public void setStatus(int newStatus);
+	public void setStatus();
 	
-	public int getStatus();
+	public Status getStatus();
 	
 	public String getCollectionAddress();
+	
+	public int getOrderID();
 
 }

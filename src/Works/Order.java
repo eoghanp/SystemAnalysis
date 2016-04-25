@@ -1,10 +1,13 @@
 package Works;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Report.Report;
+import Users.Courier;
 import Users.Recipient;
+import dataIO.DBHandler;
 import parcel.Parcel;
 
 public class Order implements Job{
@@ -16,20 +19,44 @@ public class Order implements Job{
 	int priority;
 	double price;
 	boolean paid;
-	int status;
+	//int status;
 	Report report;
 	String collectionAddress;
-	//enum status {withCustomer, withCourier, delivered};
+	public enum Status {withCustomer, withCourier, delivered, notDelivered};
+	Status status;
 	
 	
 	public Order(List<Parcel> parcels, Recipient recipient, double price, int priority, String addr){
 		this.parcels = parcels;
 		this.recipientDetails = recipient;
 		this.priority = priority;
-		this.status = 0;
+		this.status = Status.withCustomer;
 		this.price = price;
 		this.collectionAddress = addr;
 		this.report = new Report(this);
+		DBHandler db = new DBHandler();
+		int max = 0;
+		try {
+			List<Order> c = db.getOrder();
+			for(int i = 0; i < c.size(); i++)
+				if(c.get(i).getOrderID() > max)
+					max = c.get(i).getOrderID();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.OrderID = max+1;
+	}
+	
+	public Order(int id, List<Parcel> parcels, Recipient recipient, double price, int priority, String addr, String status){
+		this.parcels = parcels;
+		this.recipientDetails = recipient;
+		this.priority = priority;
+		this.status = Status.valueOf(status);
+		this.price = price;
+		this.collectionAddress = addr;
+		this.report = new Report(this);
+		this.OrderID = id;
 	}
 	
 	public void addParcel(Parcel p){
@@ -60,8 +87,22 @@ public class Order implements Job{
 		this.paid = newPaid;
 	}
 	
-	public void setStatus(int newStatus){
-		this.status = newStatus;
+	public void setStatus(){
+		switch(this.status){
+			case withCustomer: 
+				this.status = status.withCourier;
+				this.getReport().setCustomerSignature("Customer sig");
+				break;
+			case withCourier: 
+				this.status = status.delivered;
+				this.getReport().setCourierSignature("Courier sig");
+				this.getReport().setRecipientSignature("Recipient sig");
+				break;
+			case delivered: this.status = status.notDelivered;
+				break;
+			case notDelivered: this.status = status.delivered;
+				break;
+		}
 	}
 	
 	public List<Parcel> getParcels(){
@@ -92,7 +133,7 @@ public class Order implements Job{
 		return this.paid;
 	}
 
-	public int getStatus(){
+	public Status getStatus(){
 		return this.status;
 	}
 	
@@ -111,6 +152,12 @@ public class Order implements Job{
 	@Override
 	public String getCollectionAddress(){
 		return this.collectionAddress;
+	}
+
+	@Override
+	public int getOrderID() {
+		// TODO Auto-generated method stub
+		return this.OrderID;
 	}
 	
 }

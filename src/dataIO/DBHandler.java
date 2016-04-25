@@ -8,14 +8,16 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import route.Route;
-
 import Business.BusinessCustomer;
 import Users.Courier;
+import Users.LoginDetails;
 import Users.PersonCustomer;
 import Users.Manager;
 import Users.Person;
@@ -27,6 +29,81 @@ import Works.Order;
 import parcel.Parcel;
 
 public class DBHandler {
+	
+	private static ArrayList<LoginDetails> loginDetailsList = new ArrayList<LoginDetails>();
+	private static int l = 0;
+	
+	public static boolean loginUser(String email, String password) {
+		try {
+			File loginFile = new File("login.txt");
+			Scanner aFileScanner = new Scanner(loginFile);	
+			String aLineFromFile;
+
+			while (aFileScanner.hasNext()) {
+				aLineFromFile = aFileScanner.nextLine();
+				String details[] = aLineFromFile.split(",");
+				
+				int loginType = Integer.parseInt(details[0]);
+				String userName = details[1];
+				String passwordList = details[2];
+				
+				LoginDetails addLoginDetails = new LoginDetails(loginType, userName, passwordList);
+
+				loginDetailsList.add(addLoginDetails);
+			}
+			
+			while (l < loginDetailsList.size()) {
+				if (email.equalsIgnoreCase(loginDetailsList.get(l).getUserName()) && 
+						password.equals(loginDetailsList.get(l).getPassword())) {
+					return true;
+				}
+				++l;
+			}
+		} catch (FileNotFoundException fileNotFound) {
+			fileNotFound.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static int retrieveLoginType() {
+		return loginDetailsList.get(l).getLoginType();
+	}
+	
+	public boolean isValidLogin(String email, String password) 
+	{
+		if(email == null && password == null) {
+			return false;
+		}
+
+		try {
+			File loginFile = new File("login.txt");
+			Scanner aFileScanner = new Scanner(loginFile);	
+			String aLineFromFile;
+
+			while (aFileScanner.hasNext()) {
+				aLineFromFile = aFileScanner.nextLine();
+				String details[] = aLineFromFile.split(",");
+				
+				int loginType = Integer.parseInt(details[0]);
+				String userName = details[1];
+				String passwordList = details[2];
+				
+				LoginDetails addLoginDetails = new LoginDetails(loginType, userName, passwordList);
+
+				loginDetailsList.add(addLoginDetails);
+			}
+		} catch (FileNotFoundException fileNotFound) {
+			fileNotFound.printStackTrace();
+		}
+		
+		for(int j = 0; j < loginDetailsList.size(); j++) {
+			if (email.equalsIgnoreCase(loginDetailsList.get(j).getUserName()) && 
+					password.equals(loginDetailsList.get(j).getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void saveBusiness(BusinessCustomer business)
 	{
@@ -78,7 +155,7 @@ public class DBHandler {
 				String Name;
 				String Email;
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				Address = tokens[0];
 				BusinessCard = tokens[2];
 				BusinessDetails = tokens[3];
@@ -127,7 +204,8 @@ public class DBHandler {
 		data+=rec.getAddress() + "%";
 		data+=rec.getName() + "%";
 		data+=rec.getTelephone() + "%";
-		data += order.getStatus() + "\n";
+		data += order.getStatus() + "|";
+		data += order.getOrderID() + "\n";
 		
 		try{
     		File file =new File("order.txt");
@@ -140,8 +218,10 @@ public class DBHandler {
     		//true = append file
     		FileWriter fileWritter = new FileWriter(file.getName(),true);
     	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-    	        bufferWritter.write(data);
+    	        PrintWriter pw = new PrintWriter(bufferWritter);
+    	        pw.println(data);
     	        bufferWritter.close();
+    	        pw.close();
     	    
 	        System.out.println(data+" saved");
 	        
@@ -151,7 +231,7 @@ public class DBHandler {
 	}
 	
 	
-	List<Order> getOrder() throws IOException
+	public List<Order> getOrder() throws IOException
 	{
 		List<Order> orders = new ArrayList<Order>();
 		try {
@@ -161,10 +241,10 @@ public class DBHandler {
 			String line;
 			while ( ( line = br.readLine( ) ) != null ) {
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				int id = Integer.parseInt(tokens[0]);
-				boolean paid = Boolean.getBoolean(tokens[2]);
-				String [] parcels = tokens[3].split("#");
+				boolean paid = Boolean.getBoolean(tokens[1]);
+				String [] parcels = tokens[2].split("#");
 				List<Parcel> parcel = new ArrayList<Parcel>();
 				for(int i=0; i<parcels.length; i++)
 				{
@@ -186,7 +266,7 @@ public class DBHandler {
 					height=Integer.parseInt(tokensp[4]);
 					dim[0]=length;
 					dim[1]=width;
-					dim[3]=height;
+					dim[2]=height;
 					weight=Double.parseDouble(tokensp[5]);
 					urgent=Integer.parseInt(tokensp[6]);
 					requirements=tokensp[7];
@@ -194,19 +274,20 @@ public class DBHandler {
 					Parcel parcelp = new Parcel(description, idp, dim, weight, requirements, urgent);
 					parcel.add(parcelp);
 				}
-				Double price = Double.parseDouble(tokens[4]);
-				int priority=Integer.parseInt(tokens[5]);
-				String tokensr[] = tokens[6].split("%");
+				Double price = Double.parseDouble(tokens[3]);
+				int priority=Integer.parseInt(tokens[4]);
+				String tokensr[] = tokens[5].split("%");
 				String add =tokensr[0];
 				String []name =tokensr[1].split(" ");
 				String first = name[0];
 				String last = name[1];
 				String phone =tokensr[2];
-				int status = Integer.parseInt(tokensr[3]);
+				String status = tokensr[3];
+				int id2 = Integer.parseInt(tokens[6]);
 				
 				
 				Recipient rec = new Person(first, last, "", "", add, phone);
-				Order order = new Order(parcel, rec, priority, 1, null);
+				Order order = new Order(id2, parcel, rec, price, priority, null, status);
 				orders.add(order);			
 			}			
 		} catch (FileNotFoundException e) {
@@ -225,6 +306,7 @@ public class DBHandler {
 		data+=courier.getCourierID()+ "|";
 		data+=courier.getAddress() + "|";
 		data+=courier.getEmail()+ "|";
+		data+=courier.getPassword()+ "|";
 		data+=courier.getName()+ "|";
 		data+=courier.getTelephone()+ "\n";
 		
@@ -240,7 +322,10 @@ public class DBHandler {
     		//true = append file
     		FileWriter fileWritter = new FileWriter(file.getName(),true);
     	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-    	        bufferWritter.write(data);
+    	       // bufferWritter.write(data);
+    	        PrintWriter pw = new PrintWriter(bufferWritter);
+    	        pw.println(data);
+    	        pw.println();
     	        bufferWritter.close();
     	    
 	        System.out.println(data+" saved");
@@ -251,7 +336,7 @@ public class DBHandler {
 		
 	}
 	
-	List<Courier> getCourier() throws IOException
+	public List<Courier> getCourier() throws IOException
 	{
 		List<Courier> couriers = new ArrayList<Courier>();
 		try {
@@ -262,16 +347,17 @@ public class DBHandler {
 			while ( ( line = br.readLine( ) ) != null ) {
 				
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				int id = Integer.parseInt(tokens[0]);
 				String address = tokens[1];
 				String email = tokens[2];
-				String[] name = tokens[3].split(" ");
+				String password = tokens[3];
+				String[] name = tokens[4].split(" ");
 				String first = name[0];
 				String last = name[1];
-				String telephone=tokens[4];
+				String telephone=tokens[5];
 				
-				Courier corior = new Courier(first, last, email, "", address, telephone, id);
+				Courier corior = new Courier(first, last, email, password, address, telephone, id);
 				couriers.add(corior);			
 			}			
 		} catch (FileNotFoundException e) {
@@ -280,6 +366,21 @@ public class DBHandler {
 		}
 	
 		return couriers;
+	}
+	
+	public Courier getThisCourier(String uName, String pass){
+		try {
+			List<Courier> c = getCourier();
+			for(int i = 0; i < c.size(); i++){
+				if(c.get(i).getEmail().equals(uName) && c.get(i).getPassword().equals(pass)){
+					return c.get(i);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void saveCustomer(PersonCustomer customer)
@@ -314,7 +415,142 @@ public class DBHandler {
     	}
 	}
 	
-	List<PersonCustomer> getCustomer() throws IOException
+	public void saveRoute(Route route)
+	{
+		String data ="";
+
+		data+=route.getRouteId()+ "|";
+		data+=route.getRouteDetails()+ "|";
+		data+=route.getVehicle()+ "|";
+		data+=route.getDistance()+ "|";
+		List<Job> jobs = route.getJobs();
+		for(int i = 0; i < jobs.size(); i++)
+			data+=jobs.get(i).getOrderID() + ",";
+		//data+="\n";
+		try{
+    		File file =new File("routes.txt");
+    		
+    		//if file doesnt exists, then create it
+    		if(!file.exists()){
+    			file.createNewFile();
+    		}
+    		
+    		//true = append file
+    		FileWriter fileWritter = new FileWriter(file.getName(),true);
+    	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+    	        PrintWriter pw = new PrintWriter(bufferWritter);
+    	        pw.println(data);
+    	       // pw.println();
+    	        bufferWritter.close();
+    	        pw.close();
+    	    
+	        System.out.println(data+" saved");
+	        
+    	}catch(IOException e){
+    		e.printStackTrace();
+    	}
+	}
+	
+	public List<Route> getRoutes() throws IOException
+	{
+		List<Route> allRoutes = new ArrayList<Route>();
+		try {
+			FileReader fr = new FileReader("routes.txt");
+			BufferedReader br = new BufferedReader(fr);
+			//Read file line by line
+			String line;
+			while ( ( line = br.readLine( ) ) != null ) {
+				
+				
+				String[] tokens = line.split("\\|");
+				int id = Integer.parseInt(tokens[0]);
+				String details = tokens[1];
+				String vehicle = tokens[2];
+				int distance = Integer.parseInt(tokens[3]);
+				String[] jobs = tokens[4].split(",");
+				List<Order> allJobs = getOrder();
+				List<Job> myJobs = new ArrayList<Job>();
+				for(int i = 0; i < allJobs.size(); i++){
+					for(int j = 0; j < jobs.length-1; j++){
+						if (allJobs.get(i).getOrderID() == Integer.parseInt(jobs[j]))
+							myJobs.add(allJobs.get(i));	
+					}
+				}
+				
+				Route route = new Route(id, details, distance, myJobs);	
+				allRoutes.add(route);
+			}			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allRoutes;
+	}
+	
+	public void assignRoute(int rId, int cId){
+		String data ="";
+
+		data+=rId+ "|";
+		data+=cId;
+		try{
+    		File file =new File("assignedRoutes.txt");
+    		
+    		//if file doesnt exists, then create it
+    		if(!file.exists()){
+    			file.createNewFile();
+    		}
+    		
+    		//true = append file
+    		FileWriter fileWritter = new FileWriter(file.getName(),true);
+    	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+    	        PrintWriter pw = new PrintWriter(bufferWritter);
+    	        pw.println(data);
+    	        //pw.println();
+    	        bufferWritter.close();
+    	        pw.close();
+    	    
+	        System.out.println(data+" saved");
+	        
+    	}catch(IOException e){
+    		e.printStackTrace();
+    	}
+	}
+	
+	public Route getSpecificRoute(int id){
+		try {
+			FileReader fr = new FileReader("assignedRoutes.txt");
+			BufferedReader br = new BufferedReader(fr);
+			//Read file line by line
+			String line;
+			while ( ( line = br.readLine( ) ) != null ) {
+				
+				
+				String[] tokens = line.split("\\|");
+				int cId = Integer.parseInt(tokens[0]);
+				int rId = Integer.parseInt(tokens[1]);
+				if(cId == id){
+					List<Route> routes = getRoutes();
+					for(int i = (routes.size()-1); i >= 0; i--){
+						if(routes.get(i).getRouteId() == rId){
+							return routes.get(i);
+						}
+					}
+				}
+			}			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<PersonCustomer> getCustomer() throws IOException
 	{
 		List<PersonCustomer> customers = new ArrayList<PersonCustomer>();
 		try {
@@ -325,7 +561,7 @@ public class DBHandler {
 			while ( ( line = br.readLine( ) ) != null ) {
 				
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				int id = Integer.parseInt(tokens[0]);
 				String[] name = tokens[1].split(" ");
 				String first = name[0];
@@ -437,7 +673,7 @@ public class DBHandler {
 				int urgent;
 				double weight;
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				id=Integer.parseInt(tokens[0]);
 				description=tokens[1];
 				length=Integer.parseInt(tokens[2]);
@@ -461,6 +697,8 @@ public class DBHandler {
 		return parcels;
 	}
 
+	
+	
 	List<Vehicle> getVehicles() throws IOException
 	{
 		List<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -480,7 +718,7 @@ public class DBHandler {
 				double height;
 				double weight;
 				
-				String[] tokens = line.split("|");
+				String[] tokens = line.split("\\|");
 				classification = tokens[0];
 				model = tokens[2];
 				feature = tokens[3];

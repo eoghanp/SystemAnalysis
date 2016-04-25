@@ -45,6 +45,10 @@ public class Person implements Recipient{
 		return telephone;
 	}
 	
+	public String getPassword(){
+		return password;
+	}
+	
 	public void setFirstName(String fname){
 		FirstName = fname;
 	}
