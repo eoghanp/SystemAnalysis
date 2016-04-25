@@ -15,3 +15,4 @@
 15|North|Vehicle.SmallVan@25bcb56b|202|1,
 16|East|Vehicle.LargeVan@28ee1c42|273|1,
 17|Central|Vehicle.LargeVan@c02925e|354|1,
+18|West|Vehicle.SmallVan@3dbb018|114|1,
