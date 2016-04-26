@@ -2,6 +2,7 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -30,11 +31,11 @@ public class AssignCourierUI extends JPanel implements ActionListener {
 	private JTextArea assigned;
 	private String assignedTxt;
 	
-	public AssignCourierUI(Manager manager) {
+	public AssignCourierUI(Manager manager) throws IOException {
 		setLayout(null);
 		Calculator calc = new Calculator();
 		man = manager;
-		courierList = man.getListOfCouriers();
+		courierList = man.getAvailableCouriers();
 		routes = calc.calculateRoutes(man.getListOfOrders());
 		populateTable();
 		assignedTxt = "";
@@ -88,7 +89,7 @@ public class AssignCourierUI extends JPanel implements ActionListener {
 			cellData[i][0] = "" + routes.get(i).getRouteId();
 			cellData[i][1] = "" + routes.get(i).getRouteDetails();
 			cellData[i][2] = "" + routes.get(i).getDistance();
-			cellData[i][3] = "" + routes.get(i).getVehicle().getModel();
+			cellData[i][3] = "" + routes.get(i).getVehicle();
 			cellData[i][4] = "" + routes.get(i).getJobs().size();
 		}
 			

@@ -2,6 +2,8 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -61,7 +63,12 @@ public class MainManagerScreen extends JPanel implements ActionListener{
 		{
 			JFrame frame = new JFrame("Assign Courier");
 			frame.setSize(600, 600);
-			frame.getContentPane().add(new AssignCourierUI(manager));
+			try {
+				frame.getContentPane().add(new AssignCourierUI(manager));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			frame.setVisible(true);
 		}
 		else if("Review Deliveries".equals(e.getActionCommand())) 

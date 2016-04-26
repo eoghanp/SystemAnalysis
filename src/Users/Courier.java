@@ -74,4 +74,15 @@ public class Courier extends Person {
 		return this.route;
 	}
 
+	public boolean checkDone(){
+		boolean done = true;
+		for(int i = 0; i < this.route.getJobs().size(); i++){
+			if(!(this.route.getJobs().get(i).getStatus().toString().equals("delivered"))){
+				done = false;
+				return done;
+			}
+		}
+		this.route = null;
+		return done;
+	}
 }

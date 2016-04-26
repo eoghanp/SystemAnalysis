@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,9 +35,11 @@ public class LogInUI extends JPanel implements ActionListener {
 	private JLabel userNameLbl;
 	private JLabel passwordLbl;
 	private JTextField userNameTxt;
+	private JTextField IDTxt;
 	private JPasswordField passwordPwd;
 	private JButton logInBtn;
 	private JButton registerBtn;
+	private JButton trackBtn;
 
 	public LogInUI() {
 		setLayout(null);
@@ -68,6 +71,16 @@ public class LogInUI extends JPanel implements ActionListener {
 		add(registerBtn);
 		registerBtn.addActionListener(this);
 		registerBtn.setActionCommand("Register");
+		
+		IDTxt = new JTextField(20);
+		IDTxt.setBounds(180, 200, 50, 25);
+		add(IDTxt);
+		
+		trackBtn = new JButton("Track Order by ID");
+		trackBtn.setBounds(245, 200, 135, 25);
+		add(trackBtn);
+		trackBtn.addActionListener(this);
+		trackBtn.setActionCommand("Track");
 
 	}
 
@@ -88,10 +101,6 @@ public class LogInUI extends JPanel implements ActionListener {
 
 				case 0:
 					System.out.println("You are signed in as the Manager.");
-					// JOptionPane.showMessageDialog(null, "You are signed in as
-					// the Manager.");
-					// Execute method
-
 					frame.getContentPane()
 							.add(new MainManagerScreen(new Manager("first", "last", "mail", "pass", "add", "phone")));
 					frame.setVisible(true);
@@ -99,18 +108,12 @@ public class LogInUI extends JPanel implements ActionListener {
 
 				case 1:
 					System.out.println("You are signed in as a Business.");
-					// JOptionPane.showMessageDialog(null, "You are signed in as
-					// a Business.");
-					// Execute method
-
 					// frame.getContentPane().add(new MainCustomerScreen());
 					// frame.setVisible(true);
 					break;
 
 				case 2:
 					System.out.println("You are signed in as a Customer.");
-					// JOptionPane.showMessageDialog(null, "You are signed in as
-					// a Customer.");
 					DBHandler db = DBHandler.getSingletonInstance();
 					frame.getContentPane().add(new MainCustomerScreen(
 							db.getThisCustomer(userNameTxt.getText(), new String(passwordPwd.getPassword()))));
@@ -136,6 +139,21 @@ public class LogInUI extends JPanel implements ActionListener {
 			frame1.setSize(575, 350);
 			frame1.getContentPane().add(new RegisterUI());
 			frame1.setVisible(true);
+		} else if ("Track".equals(evt.getActionCommand())) {
+			if(IDTxt.getText() != null){
+				DBHandler db1 = DBHandler.getSingletonInstance();
+				String txt = "";
+				try {
+					txt += db1.trackDelivery(Integer.parseInt(IDTxt.getText()));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Order Id: " + IDTxt.getText() + "\nStatus: " + txt);
+			}
 		}
 	}
 }

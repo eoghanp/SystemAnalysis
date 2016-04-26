@@ -19,13 +19,16 @@ public class MainCourierScreen extends JPanel implements ActionListener{
 
 	private List<Job> jobs;
 	private JTable table;
+	private Courier cour;
 	
 	public MainCourierScreen(Courier courier) {
 		// TODO Auto-generated constructor stub
 		setLayout(null);
 		
-		courier.getSchedule();
-		Route route = courier.getRoute();
+		cour = courier;
+		
+		cour.getSchedule();
+		Route route = cour.getRoute();
 		if (route != null){
 			jobs = route.getJobs();
 		
@@ -66,6 +69,8 @@ public class MainCourierScreen extends JPanel implements ActionListener{
 			{
 				jobs.get(table.getSelectedRow()).setStatus();
 				JOptionPane.showMessageDialog(null, "Signed for order " + jobs.get(table.getSelectedRow()).getOrderID() + "\n" + jobs.get(table.getSelectedRow()).getStatus());
+				if(cour.checkDone())
+					JOptionPane.showMessageDialog(null, "All deliveries are now completed");
 			}
 		
 	}

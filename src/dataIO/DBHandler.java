@@ -215,7 +215,7 @@ public class DBHandler {
 		data+=rec.getName() + "%";
 		data+=rec.getTelephone() + "%";
 		data += order.getStatus() + "|";
-		data += order.getOrderID() + "\n";
+		data += order.getOrderID();
 		
 		try{
     		File file =new File("order.txt");
@@ -403,7 +403,7 @@ public class DBHandler {
 		data+=customer.getEmail()+ "|";
 		data+=customer.getAddress()+ "|";
 		data+=customer.getTelephone()+ "|";
-		data+=customer.getCardNumber()+ "\n";
+		data+=customer.getCardNumber();
 		
 		try{
     		File file =new File("customer.txt");
@@ -580,6 +580,71 @@ public class DBHandler {
 		return null;
 	}
 	
+	public List<Route> getUnassignedRoutes() throws IOException{
+		List<Route> allRoutes = new ArrayList<Route>();
+		try {
+			allRoutes = getRoutes();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Route> routes = new ArrayList<Route>();
+		List<Integer> ids = new ArrayList<Integer>();
+		try {
+			FileReader fr = new FileReader("assignedRoutes.txt");
+			BufferedReader br = new BufferedReader(fr);
+			//Read file line by line
+			String line;
+			while ( ( line = br.readLine( ) ) != null ) {
+					
+				String[] tokens = line.split("\\|");
+				int id = Integer.parseInt(tokens[0]);
+				ids.add(id);
+				
+			}		
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean found = false;
+		for(int i = 0; i < allRoutes.size(); i++){
+			found = false;
+			for(int j = 0; j < ids.size() && !found; j++)
+				if(allRoutes.get(i).getRouteId() == ids.get(j)){
+					found = true;
+				}
+			if(!found)
+				routes.add(allRoutes.get(i));
+		}
+		return routes;
+	}
+	
+	public int getMaxOrderIdFromRoute() throws IOException{
+		List<Route> allRoutes = new ArrayList<Route>();
+		int max = 0;
+		try {
+			FileReader fr = new FileReader("routes.txt");
+			BufferedReader br = new BufferedReader(fr);
+			//Read file line by line
+			String line;
+			while ( ( line = br.readLine( ) ) != null ) {
+					
+				String[] tokens = line.split("\\|");
+				String[] jobs = tokens[4].split(",");
+				for(int i = 0; i < jobs.length; i++){
+					if(Integer.parseInt(jobs[i]) > max)
+						max = Integer.parseInt(jobs[i]);
+				}
+			}		
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return max;
+	}
+	
 	public List<PersonCustomer> getCustomer() throws IOException
 	{
 		List<PersonCustomer> customers = new ArrayList<PersonCustomer>();
@@ -588,8 +653,7 @@ public class DBHandler {
 			BufferedReader br = new BufferedReader(fr);
 			//Read file line by line
 			String line;
-			while ( ( line = br.readLine( ) ) != null ) {
-				
+			while (( line = br.readLine( ) ) != null){ 
 				
 				String[] tokens = line.split("\\|");
 				int id = Integer.parseInt(tokens[0]);
@@ -774,7 +838,13 @@ public class DBHandler {
 		return vehicles;
 	}
 	
-	
+	public String trackDelivery(int id) throws IOException{
+		List<Order> o = getOrder();
+		for(int i = 0; i < o.size(); i++)
+			if(o.get(i).getOrderID() == id)
+				return o.get(i).getStatus().toString();
+		return null;
+	}
 
 	
 }

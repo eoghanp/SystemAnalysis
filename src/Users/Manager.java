@@ -83,4 +83,13 @@ public class Manager extends Person{
 		myReport.prtReport();
 	}
 
+	public List<Courier> getAvailableCouriers() {
+		List<Courier> c = new ArrayList<Courier>();
+		for(int i = 0; i < listOfCouriers.size(); i++){
+			if(listOfCouriers.get(i).getRoute() == null)
+				c.add(listOfCouriers.get(i));
+		}
+		return c;
+	}
+
 }

@@ -67,7 +67,7 @@ public class Calculator {
 		return cost;
 	}
 	
-	public List<Route> calculateRoutes(List<Order> listOfOrders){
+	public List<Route> calculateRoutes(List<Order> listOfOrders) throws IOException{
 		RoutingInterface routingAlgoritm1 = new RoutingAlgorithm1();
 		RoutingInterface routingAlgoritm2 = new RoutingAlgorithm2();
 		Thread r1 = (Thread) routingAlgoritm1;
@@ -97,25 +97,38 @@ public class Calculator {
 			}
 			routes.add(new Route(max+1, null));
 			
+			int max2 = db.getMaxOrderIdFromRoute();
 			for (int j = 0; j < 5 && a < listOfOrders.size(); j++){
-				routes.get(i).addJob(listOfOrders.get(a));
+				if(listOfOrders.get(a).getOrderID() > max2)
+					routes.get(i).addJob(listOfOrders.get(a));
 				a++;
 			}
 		}
 		
-		VehicleFactory vf = new VehicleFactory();
+		List<Route> finalRoutes = new ArrayList<Route>();
 		for (int i = 0; i < routes.size(); i++){
-			routes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);
-			routes.get(i).setDistance((((int)(Math.random()*400) + 50)));//use order details in future
+			if(!(routes.get(i).getJobs().isEmpty())){
+				finalRoutes.add(routes.get(i));
+				db.saveRoute(routes.get(i));
+			}
+		}
+		
+		VehicleFactory vf = new VehicleFactory();
+		for (int i = 0; i < finalRoutes.size(); i++){
+			finalRoutes.get(i).setRouteDetails(descriptions[((int)(Math.random()*5))]);
+			finalRoutes.get(i).setDistance((((int)(Math.random()*400) + 50)));//use order details in future
 			Vehicle vehicle = vf.getVehicle(vehicles[((int)(Math.random() * 3))]);
-			routes.get(i).assignVehicle(vehicle);//more complex in future - use parcel requirements
-			db.saveRoute(routes.get(i));
+			finalRoutes.get(i).assignVehicle(vehicle);//more complex in future - use parcel requirements
 			Subject subject = (Subject) vehicle;
-			subject.registerObserver(routes.get(i));
+			subject.registerObserver(finalRoutes.get(i));
 			LocationUpdater lu = new LocationUpdater(vehicle);
 			lu.start();
 		}
 		
-		return routes;
+		List<Route> moreRoutes = db.getUnassignedRoutes();
+		for(int x = 0; x < moreRoutes.size(); x++)
+			finalRoutes.add(moreRoutes.get(x));
+		return finalRoutes;
 	}
+
 }
