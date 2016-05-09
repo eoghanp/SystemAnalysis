@@ -1,8 +1,7 @@
-Delivery Completed Successfully
 DELIVERY REPORT
 
 Report ID: 1
-Delivery Status: Delivery completed and verified by manager
+Delivery Status: null
 Delivery Time: 
 Number of Dispatches: 0
 Customer Name: 
@@ -12,7 +11,7 @@ Courier Signiture: null
 Recipient Name: 
 Recipient Signature: null
 Manager Name: 
-Manager Signature: first last
+Manager Signature: null
 
-2016/04/24 17:50:24
+2016/05/09 22:11:44
 Company Name

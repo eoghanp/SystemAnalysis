@@ -26,3 +26,17 @@
 2,u,u
 2,customer2,customer2
 2,cust,cust
+2,examplecustomer11@ulmail,exmple
+3,dlo.mail,dlopez
+2,hubert,hubert
+3,wazza@hotmail.com,manu
+3,courier1,courier1
+3,dLopez@flash.com,dlopez
+2,Guillaume,Guillaume
+2,Karl,Karl
+2,Customer1,customer1
+3,given@flash.com,given
+3,dunne@flash.com,dunne
+3,duff@flash.com,duff
+3,keane@flash.com,keane
+3,courier,courier

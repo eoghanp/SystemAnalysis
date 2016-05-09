@@ -318,7 +318,7 @@ public class DBHandler {
 		data+=courier.getEmail()+ "|";
 		data+=courier.getPassword()+ "|";
 		data+=courier.getName()+ "|";
-		data+=courier.getTelephone()+ "\n";
+		data+=courier.getTelephone();
 		
 	
 		try{ 		
@@ -335,7 +335,6 @@ public class DBHandler {
     	       // bufferWritter.write(data);
     	        PrintWriter pw = new PrintWriter(bufferWritter);
     	        pw.println(data);
-    	        pw.println();
     	        bufferWritter.close();
     	    
 	        System.out.println(data+" saved");

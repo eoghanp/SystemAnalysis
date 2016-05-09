@@ -1,1 +1,0 @@
-18|Central|Vehicle.LargeVan@6e29991|200|1,2,19|West|Vehicle.LargeVan@6230aaf3|416|3,

@@ -95,7 +95,7 @@ public class Calculator {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			routes.add(new Route(max+1, null));
+			routes.add(new Route(max+i+1, null));
 			
 			int max2 = db.getMaxOrderIdFromRoute();
 			for (int j = 0; j < 5 && a < listOfOrders.size(); j++){
@@ -107,7 +107,7 @@ public class Calculator {
 		
 		List<Route> finalRoutes = new ArrayList<Route>();
 		for (int i = 0; i < routes.size(); i++){
-			if(!(routes.get(i).getJobs().isEmpty())){
+			if(routes.get(i).getJobs().size() > 0){
 				finalRoutes.add(routes.get(i));
 				db.saveRoute(routes.get(i));
 			}
@@ -126,8 +126,15 @@ public class Calculator {
 		}
 		
 		List<Route> moreRoutes = db.getUnassignedRoutes();
-		for(int x = 0; x < moreRoutes.size(); x++)
-			finalRoutes.add(moreRoutes.get(x));
+		boolean duplicate = false;
+		for(int x = 0; x < moreRoutes.size(); x++){
+			duplicate = false;
+			for(int y = 0; y < finalRoutes.size(); y++)
+				if (moreRoutes.get(x).getRouteId() == finalRoutes.get(y).getRouteId())
+					duplicate = true;
+			if(!duplicate)
+				finalRoutes.add(moreRoutes.get(x));
+		}
 		return finalRoutes;
 	}
 
